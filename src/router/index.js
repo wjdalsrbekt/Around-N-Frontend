@@ -6,7 +6,11 @@ import BoardWrite from '@/components/Board/BoardWrite.vue';
 import BoardRead from '@/components/Board/BoardRead.vue';
 import BoardUpdate from '@/components/Board/BoardUpdate.vue';
 import BoardDelete from '@/components/Board/BoardDelete.vue';
-
+import UserLogin from '@/components/User/UserLogin.vue';
+import UserRegist from '@/components/User/UserRegist.vue';
+import UserUpdate from '@/components/User/UserUpdate.vue';
+import UserDelete from '@/components/User/UserDelete.vue';
+import User from '@/views/User.vue';
 Vue.use(VueRouter);
 
 // const routes = [
@@ -51,6 +55,26 @@ export const router = new VueRouter({
     {
       path: '/board/create',
       component: BoardWrite,
+    },
+    {
+      path: '/user',
+      component: User,
+    },
+    {
+      path: '/user/login',
+      component: UserLogin,
+    },
+    {
+      path: '/regist',
+      component: UserRegist,
+    },
+    {
+      path: '/user/update',
+      component: UserUpdate,
+    },
+    {
+      path: '/user/delete',
+      component: UserDelete,
     },
   ],
 });
