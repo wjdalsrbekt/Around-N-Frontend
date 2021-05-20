@@ -17,26 +17,30 @@
           </tr>
         </thead>
         <tbody>
-          <board-list-item v-for="(board, index) in boards" :key="index" :board="board" />
-          <!-- :bnum="board.bnum"
+          <template v-for="(board, index) in boards">
+            <board-list-item :board="board" :key="index" v-if="board.title.includes(Sword)" />
+            <!-- v-for="(board, index) in boards"
+            :key="index" -->
+            <!-- :bnum="board.bnum"
             :title="board.title"
             :userid="board.userid"
             :regdate="board.regdate" -->
+          </template>
         </tbody>
       </table>
     </div>
     <div v-else>작성된 글이 없습니다.</div>
     <button @click="movePage">작성</button>
     <div>
-      <form action="" id="searchform" method="get">
-        <select name="key" id="key" v-model="Skey">
-          <option value="all">전체</option>
-          <option value="id">아이디</option>
-          <option value="content">내용</option>
-        </select>
-        <input type="text" placeholder="검색어 입력" name="word" id="word" v-model="Sword" />
-        <button @click="searchBtn">검색</button>
-      </form>
+      <!-- <form action="" id="searchform" method="get"> -->
+      <!-- <select name="key" id="key" v-model="Skey"> -->
+      <!-- <option value="id">아이디</option> -->
+      <!-- <option value="content">내용</option> -->
+      <!-- </select> -->
+      <br />
+      <input type="text" placeholder="검색어 입력" name="word" id="word" v-model="Sword" />
+      <!-- <button @click="searchBtn">검색</button> -->
+      <!-- </form> -->
     </div>
   </div>
 </template>
@@ -53,6 +57,7 @@ export default {
       boards: '',
       Skey: '',
       Sword: '',
+      Search: '',
     };
   },
   components: {
@@ -69,12 +74,19 @@ export default {
     searchBtn() {
       // if (this.Sword) this.getBoardList({ key: this.Skey, word: this.Sword });
       // this.Sword = '';
-      console.log(this.Skey);
-      console.log(this.Sword);
+      // this.Search = {
+      //   key: this.Skey,
+      //   word: this.Sword,
+      // };
+
+      // console.log(this.Search);
+      // console.log(this.Skey);
+      // console.log(this.Sword);
       http
         .post('/board/list', {
-          key: this.Skey,
-          word: this.Sword,
+          // params: this.Search,
+          key: '',
+          word: '',
         })
         .then((resp) => {
           // console.log('리스트들어옴');
@@ -89,20 +101,21 @@ export default {
     },
   },
   mounted: function () {
-    http
-      .post('/board/list', {
-        key: this.Skey,
-        word: this.Sword,
-      })
-      .then((resp) => {
-        // console.log('리스트들어옴');
-        // console.log(resp);
-        // commit('GET_BOARD_LIST', resp.data);
-        this.boards = resp.data;
-      })
-      .catch((error) => {
-        console.dir(error);
-      });
+    this.searchBtn();
+    // http
+    //   .post('/board/list', {
+    //     key: this.Skey,
+    //     word: this.Sword,
+    //   })
+    //   .then((resp) => {
+    //     // console.log('리스트들어옴');
+    //     // console.log(resp);
+    //     // commit('GET_BOARD_LIST', resp.data);
+    //     this.boards = resp.data;
+    //   })
+    //   .catch((error) => {
+    //     console.dir(error);
+    //   });
     // this.$store.dispatch('getBoardList', { key: '', word: '' });
   },
 };
