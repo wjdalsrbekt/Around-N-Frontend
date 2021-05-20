@@ -27,9 +27,11 @@
       </tr>
     </table>
     <div>
-      <router-link :to="'/board/update?bnum=' + board.bnum">수정</router-link>
-      <!-- <button @click="deleteItem">삭제</button> -->
-      <router-link :to="'/board/delete?bnum=' + board.bnum">삭제</router-link>
+      <a v-if="board.userid === this.loginCookie">
+        <router-link :to="'/board/update?bnum=' + board.bnum">수정</router-link>
+        <!-- <button @click="deleteItem">삭제</button> -->
+        <router-link :to="'/board/delete?bnum=' + board.bnum">삭제</router-link>
+      </a>
     </div>
     <hr />
     <!--댓글 시작 -->
@@ -40,7 +42,7 @@
         <td>{{ item.user_name }}</td>
         <td>{{ item.comment_time | date }}</td>
         <!-- <button @click="modifyComment">수정</button> -->
-        <button @click="deleteComment(item.comment_no)">삭제</button>
+        <button @click="deleteComment(item.comment_no, item.user_name)">삭제</button>
       </tr>
     </table>
     <div>
@@ -55,7 +57,7 @@
       />
       <br />
       <!--여기!!!! -->
-      <label for="user_name">작성자</label>
+      <!-- <label for="user_name">작성자</label>
       <input
         type="text"
         name="user_name"
@@ -63,7 +65,7 @@
         v-model="user_name"
         ref="user_name"
         placeholder="ssafy"
-      />
+      /> -->
       <button @click="checkValue">작성</button>
       <br />
     </div>
@@ -85,6 +87,7 @@ export default {
       comment_content: '',
       comment_time: '',
       bnum: '',
+      loginCookie: '',
     };
   },
   components: {},
@@ -109,6 +112,7 @@ export default {
       this.comment = data;
     });
     this.bnum = this.$route.query.bnum;
+    this.loginCookie = this.$cookie.get('userid');
   },
   methods: {
     // ...mapActions(['deleteBoard']),
@@ -128,11 +132,12 @@ export default {
         err = false;
         msg = '내용을 입력해주세요.';
         this.$refs.comment_content.focus();
-      } else if (!this.user_name) {
-        err = false;
-        msg = '작성자를 입력해주세요.';
-        this.$refs.user_name.focus();
       }
+      // else if (!this.user_name) {
+      //   err = false;
+      //   msg = '작성자를 입력해주세요.';
+      //   this.$refs.user_name.focus();
+      // }
 
       if (!err) alert(msg);
       else this.writeComment();
@@ -141,7 +146,7 @@ export default {
       http
         .post('/comment', {
           comment_no: this.comment_no,
-          user_name: this.user_name,
+          user_name: this.$cookie.get('userid'),
           comment_content: this.comment_content,
           comment_time: this.comment_time,
           bnum: this.bnum,
@@ -158,15 +163,19 @@ export default {
           this.$router.push('/board/list');
         });
     },
-    deleteComment(cnum) {
-      http.delete('/comment/' + cnum).then(({ data }) => {
-        let msg = '댓글 삭제 중 문제가 발생했습니다.';
-        if (data === 'success') {
-          msg = '삭제가 완료되었습니다.';
-        }
-        alert(msg);
-        this.$router.go(this.$router.currentRoute);
-      });
+    deleteComment(cnum, writer) {
+      if (writer != this.$cookie.get('userid')) {
+        alert('본인만 삭제를 할 수 있습니다.');
+      } else {
+        http.delete('/comment/' + cnum).then(({ data }) => {
+          let msg = '댓글 삭제 중 문제가 발생했습니다.';
+          if (data === 'success') {
+            msg = '삭제가 완료되었습니다.';
+          }
+          alert(msg);
+          this.$router.go(this.$router.currentRoute);
+        });
+      }
     },
   },
 };

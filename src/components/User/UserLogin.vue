@@ -1,9 +1,8 @@
 <template>
-  <form action="" id="loginform" method="post">
+  <div>
     <label for="userid">아이디 : </label>
     <input
       ref="userid"
-      key=""
       type="text"
       v-model="userid"
       name="userid"
@@ -22,7 +21,7 @@
     />
     <br />
     <button @click="login">로그인</button>
-  </form>
+  </div>
 </template>
 
 <script>
@@ -45,6 +44,7 @@ export default {
         this.$refs.userid.focus();
       } else if (!this.userpwd) {
         err = false;
+        msg = '패스워드를 입력해주세요.';
         this.$refs.userpwd.focus();
       }
 
@@ -57,10 +57,13 @@ export default {
           userid: this.userid,
           userpwd: this.userpwd,
         })
-        .then((resp) => {
-          this.token = resp.data;
-          console.log(this.token);
+        .then(({ data }) => {
+          alert('환영합니다!');
+          console.log(data);
+          this.$cookie.set('userid', data.userid);
+          this.$router.go(this.$router.currentRoute);
         });
+      this.$router.push('/');
     },
   },
 };

@@ -13,7 +13,9 @@ export default {
     Header,
   },
   data() {
-    return {};
+    return {
+      loginCookie: document.cookie,
+    };
   },
   methods: {},
 };

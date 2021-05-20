@@ -98,7 +98,7 @@ export default {
           bnum: this.bnum,
           title: this.title,
           // userid: this.userid,
-          userid: 'ssafy',
+          userid: this.$cookie.get('userid'),
           price: this.price,
           content: this.content,
           regdate: this.regdate,
@@ -117,28 +117,32 @@ export default {
         });
     },
     updateHandler() {
-      http
-        .put('/board', {
-          bnum: this.bnum,
-          title: this.title,
-          // userid: this.userid,
-          userid: 'ssafy',
-          price: this.price,
-          content: this.content,
-          regdate: this.regdate,
-        })
-        .then(({ data }) => {
-          let msg = '수정 처리 중 문제가 발생하였습니다.';
-          if (data === 'success') {
-            msg = '수정이 완료되었습니다.';
-          }
+      if (this.$cookie.get('userid') != this.userid) {
+        alert('본인만 게시글을 수정할 수 있습니다.');
+      } else {
+        http
+          .put('/board', {
+            bnum: this.bnum,
+            title: this.title,
+            // userid: this.userid,
+            userid: this.$cookie.get('userid'),
+            price: this.price,
+            content: this.content,
+            regdate: this.regdate,
+          })
+          .then(({ data }) => {
+            let msg = '수정 처리 중 문제가 발생하였습니다.';
+            if (data === 'success') {
+              msg = '수정이 완료되었습니다.';
+            }
 
-          alert(msg);
-          this.moveList();
-        })
-        .catch(() => {
-          this.moveList();
-        });
+            alert(msg);
+            this.moveList();
+          })
+          .catch(() => {
+            this.moveList();
+          });
+      }
     },
     moveList() {
       this.$router.push('/board');

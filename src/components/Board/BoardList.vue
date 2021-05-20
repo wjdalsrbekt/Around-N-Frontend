@@ -58,6 +58,7 @@ export default {
       Skey: '',
       Sword: '',
       Search: '',
+      loginCookie: '',
     };
   },
   components: {
@@ -68,7 +69,12 @@ export default {
   },
   methods: {
     movePage() {
-      this.$router.push('/board/create');
+      // console.log(this.loginCookie);
+      if (this.loginCookie) {
+        this.$router.push('/board/create');
+      } else {
+        alert('로그인 한 회원만 사용가능합니다.');
+      }
     },
     // ...mapActions(['getBoardList']),
     searchBtn() {
@@ -117,6 +123,9 @@ export default {
     //     console.dir(error);
     //   });
     // this.$store.dispatch('getBoardList', { key: '', word: '' });
+  },
+  created() {
+    this.loginCookie = this.$cookie.get('userid');
   },
 };
 </script>
