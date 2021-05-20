@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import http from '@/util/http-commons';
+import http from '@/util/http-common';
 export default {
   data() {
     return {
@@ -49,7 +49,7 @@ export default {
       }
 
       if (!err) alert(msg);
-      else loginUser();
+      else this.loginUser();
     },
     loginUser() {
       http
