@@ -31,35 +31,63 @@
       <!-- <button @click="deleteItem">삭제</button> -->
       <router-link :to="'/board/delete?bnum=' + board.bnum">삭제</router-link>
     </div>
-    <!-- <h3>댓글[{{ comments.length }}]</h3>
+    <hr />
+    <!--댓글 시작 -->
+    <h3>댓글[{{ comment.length }}]</h3>
     <table>
-      <comment-list-item
-        v-for="comment in comments"
-        :key="`${comment.comment_no}`"
-        :user_name="comment.user_name"
-        :comment="comment.comment"
-        :comment_time="comment.comment_time"
-        :comment_no="comment.comment_no"
-        :bnum="comment.bnum"
+      <tr v-for="(item, index) in comment" :key="`${index}_comment`">
+        <td>{{ item.comment_content }}</td>
+        <td>{{ item.user_name }}</td>
+        <td>{{ item.comment_time | date }}</td>
+        <!-- <button @click="modifyComment">수정</button> -->
+        <button @click="deleteComment(item.comment_no)">삭제</button>
+      </tr>
+    </table>
+    <div>
+      <label for="comment_content">내용</label>
+      <input
+        type="text"
+        id="comment_content"
+        name="comment_content"
+        v-model="comment_content"
+        ref="comment_content"
+        placeholder="댓글 내용을 입력하세요."
       />
-    </table> -->
+      <br />
+      <!--여기!!!! -->
+      <label for="user_name">작성자</label>
+      <input
+        type="text"
+        name="user_name"
+        id="user_name"
+        v-model="user_name"
+        ref="user_name"
+        placeholder="ssafy"
+      />
+      <button @click="checkValue">작성</button>
+      <br />
+    </div>
   </div>
 </template>
-
 <script>
+import moment from 'moment';
+import http from '@/util/http-common';
 import { mapState } from 'vuex';
 // import { mapActions } from 'vuex';
-// import CommentListItem from './CommentListItem.vue';
 export default {
   name: 'BoardDetail',
   data() {
     return {
-      code: '',
+      // code: '',
+      comment: '',
+      comment_no: '',
+      user_name: '',
+      comment_content: '',
+      comment_time: '',
+      bnum: '',
     };
   },
-  components: {
-    // CommentListItem,
-  },
+  components: {},
   computed: {
     ...mapState(['board']),
     // ...mapState(['board'], ['commments']),
@@ -69,11 +97,18 @@ export default {
       if (!value) return value;
       return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
     },
+    date(time) {
+      return moment(new Date(time)).format('MM-DD h:m a');
+    },
   },
   created() {
     // console.log('들어옴');
     // console.log(this.$route.query.bnum);
     this.$store.dispatch('getBoard', this.$route.query.bnum);
+    http.get(`/comment/${this.$route.query.bnum}`).then(({ data }) => {
+      this.comment = data;
+    });
+    this.bnum = this.$route.query.bnum;
   },
   methods: {
     // ...mapActions(['deleteBoard']),
@@ -85,6 +120,54 @@ export default {
     // moveList() {
     //   this.$router.push('/board');
     // },
+    checkValue() {
+      let err = true;
+      let msg = '';
+
+      if (!this.comment_content) {
+        err = false;
+        msg = '내용을 입력해주세요.';
+        this.$refs.comment_content.focus();
+      } else if (!this.user_name) {
+        err = false;
+        msg = '작성자를 입력해주세요.';
+        this.$refs.user_name.focus();
+      }
+
+      if (!err) alert(msg);
+      else this.writeComment();
+    },
+    writeComment() {
+      http
+        .post('/comment', {
+          comment_no: this.comment_no,
+          user_name: this.user_name,
+          comment_content: this.comment_content,
+          comment_time: this.comment_time,
+          bnum: this.bnum,
+        })
+        .then(({ data }) => {
+          let msg = '댓글 작성 중 문제가 발생했습니다.';
+          if (data === 'success') {
+            msg = '등록이 완료되었습니다.';
+          }
+          alert(msg);
+          this.$router.go(this.$router.currentRoute);
+        })
+        .catch(() => {
+          this.$router.push('/board/list');
+        });
+    },
+    deleteComment(cnum) {
+      http.delete('/comment/' + cnum).then(({ data }) => {
+        let msg = '댓글 삭제 중 문제가 발생했습니다.';
+        if (data === 'success') {
+          msg = '삭제가 완료되었습니다.';
+        }
+        alert(msg);
+        this.$router.go(this.$router.currentRoute);
+      });
+    },
   },
 };
 </script>
