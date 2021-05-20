@@ -1,18 +1,18 @@
 <template>
   <div>
     <board-list />
-    <board-search-bar />
+    <!-- <board-search-bar /> -->
   </div>
 </template>
 <script>
-import BoardSearchBar from '@/components/Board/BoardSearchBar.vue';
+// import BoardSearchBar from '@/components/Board/BoardSearchBar.vue';
 import BoardList from '@/components/Board/BoardList.vue';
 
 export default {
   name: 'Board',
   components: {
     BoardList,
-    BoardSearchBar,
+    // BoardSearchBar,
   },
   data() {
     return {};

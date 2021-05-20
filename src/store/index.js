@@ -13,6 +13,7 @@ export default new Vuex.Store({
   },
   mutations: {
     GET_BOARD_LIST(state, boards) {
+      console.log(boards);
       state.boards = boards;
     },
     GET_BOARD(state, board) {
@@ -34,9 +35,16 @@ export default new Vuex.Store({
     // },
   },
   actions: {
-    getBoardList({ commit }) {
+    getBoardList({ commit }, search) {
+      // console.log('리스트');
+      console.log('키값입니다...' + search.key);
+      console.log('워드값입니다...' + search.word);
+
       http
-        .get('/board')
+        .post('/board/list', {
+          key: search.key,
+          word: search.word,
+        })
         .then((resp) => {
           // console.log('리스트들어옴');
           // console.log(resp);
