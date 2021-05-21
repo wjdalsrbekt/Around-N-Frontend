@@ -11,6 +11,7 @@
       <router-link to="/weather">날씨</router-link>|
       <router-link to="/maplist">지도</router-link>
       <router-link to="/maplistY">영주지도</router-link>
+      <router-link to="/apt">매물보러가기</router-link>
     </nav>
   </header>
 </template>

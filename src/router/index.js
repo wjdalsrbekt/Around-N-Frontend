@@ -13,6 +13,7 @@ import UserDelete from '@/components/User/UserDelete.vue';
 import Weather from '@/views/Weather.vue';
 import Maplist from '@/views/Maplist.vue';
 import YMaplist from '@/views/MaplistY.vue';
+import Apt from '@/views/Apt.vue';
 Vue.use(VueRouter);
 
 // const routes = [
@@ -85,6 +86,10 @@ export const router = new VueRouter({
     {
       path: '/maplistY',
       component: YMaplist,
+    },
+    {
+      path: '/apt',
+      component: Apt,
     },
   ],
 });
