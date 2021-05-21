@@ -8,6 +8,7 @@
       type="text"
       name="word"
       id="word"
+      ref="word"
       v-model.trim="word"
       placeholder="검색어 입력."
       @keypress.enter="checkValue"
@@ -26,7 +27,7 @@ export default {
     };
   },
   methods: {
-    ...mapActions(['getAptList']),
+    ...mapActions(['getAptList', 'getWeather']),
     checkValue() {
       let err = true;
       let msg = '';
@@ -40,10 +41,13 @@ export default {
       }
 
       if (!err) alert(msg);
-      else sendKeyword();
+      else this.sendKeyword();
     },
     sendKeyword() {
       this.getAptList({ key: this.key, word: this.word });
+      if (this.key === 'dong') {
+        this.getWeather(this.word);
+      }
       this.word = '';
     },
   },

@@ -8,10 +8,13 @@
     <td>{{ this.apt.dong }}</td>
     <td>{{ this.apt.aptName }}</td>
     <td>{{ this.apt.buildYear }}</td>
-    <td>{{ this.apt.dealYear }}-{{ this.apt.dealMonth }}={{ this.apt.dealDay }}</td>
-    <td>{{ this.apt.area | calc }}</td>
+    <td>{{ this.apt.dealYear }}년 {{ this.apt.dealMonth }}월 {{ this.apt.dealDay }}일</td>
+    <td>{{ this.apt.area | calc }}평</td>
     <td>{{ this.apt.floor }}층</td>
-    <td>{{ (this.apt.dealAmount.replace(',', '') * 10000) | price }}원</td>
+    <td v-if="apt.dealAmount != null">
+      {{ (this.apt.dealAmount.replace(',', '') * 10000) | price }}원
+    </td>
+    <td v-else>매매 가격 정보가 없습니다.</td>
   </tr>
 </template>
 <script>
@@ -37,7 +40,7 @@ export default {
   },
   filters: {
     calc(area) {
-      return area * 0.3025;
+      return (area * 0.3025).toFixed(2);
     },
     price(value) {
       if (!value) return value;

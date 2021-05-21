@@ -14,15 +14,13 @@
           <th>거래가격(월세)</th>
         </tr>
       </thead>
-      <tbody>
-        <div v-if="apts && apts.length != 0" class="block">
-          <apt-list-item v-for="(apt, index) in apts" :key="index" :apt="apt" />
-        </div>
-        <div v-else class="block">
-          <tr>
-            아파트 목록이 없습니다.
-          </tr>
-        </div>
+      <tbody v-if="apts && apts.length != 0">
+        <apt-list-item v-for="(apt, index) in apts" :key="index" :apt="apt" />
+      </tbody>
+      <tbody v-else>
+        <tr>
+          <td colspan="7">매물 정보가 없습니다.</td>
+        </tr>
       </tbody>
     </table>
   </div>
@@ -30,20 +28,16 @@
 
 <script>
 import { mapState } from 'vuex';
-import AptListItem from '@/components/apt/AptListItem.vue';
+import AptListItem from '@/components/Apt/AptListItem.vue';
 export default {
   name: 'AptList',
   components: {
     AptListItem,
   },
   computed: {
-    ...mapState(['apt']),
+    ...mapState(['apts']),
   },
 };
 </script>
 
-<style scoped>
-.block {
-  display: inline-block;
-}
-</style>
+<style scoped></style>
