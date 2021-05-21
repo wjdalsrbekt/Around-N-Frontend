@@ -3,7 +3,19 @@
 </template>
 
 <script>
-export default {};
+import { mapState } from 'vuex';
+export default {
+  name: 'AptDetail',
+  data() {
+    return {
+      lat: '',
+      lon: '',
+    };
+  },
+  computed: {
+    ...mapState(['apt']),
+  },
+};
 </script>
 
 <style></style>
