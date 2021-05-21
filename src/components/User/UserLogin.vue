@@ -58,10 +58,14 @@ export default {
           userpwd: this.userpwd,
         })
         .then(({ data }) => {
-          alert('환영합니다!');
           console.log(data);
-          this.$cookie.set('userid', data.userid);
-          this.$router.go(this.$router.currentRoute);
+          if (data.userid) {
+            alert('환영합니다!');
+            this.$cookie.set('userid', data.userid);
+            this.$router.go(this.$router.currentRoute);
+          } else {
+            alert('존재하지 않는 회원입니다.');
+          }
         });
       this.$router.push('/');
     },
