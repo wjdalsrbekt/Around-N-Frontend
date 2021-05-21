@@ -1,12 +1,16 @@
 <template>
   <div id="app">
     <div id="map"></div>
-    <button @click="panTo()">부드럽게 이동하기!</button>
+    <button @click="panTo">이동</button>
   </div>
 </template>
-
 <script>
 export default {
+  data() {
+    return {
+      map: '',
+    };
+  },
   mounted() {
     if (window.kakao && window.kakao.maps) {
       this.initMap();
@@ -26,12 +30,12 @@ export default {
         level: 3,
       };
 
-      var map = new kakao.maps.Map(container, options);
-      map.setMapTypeId(kakao.maps.MapTypeId.HYBRID);
+      this.map = new kakao.maps.Map(container, options);
+      this.map.setMapTypeId(kakao.maps.MapTypeId.HYBRID);
     },
     panTo() {
-      //   var moveLatLon = new kakao.mpas.LatLng(37.575999, 126.97);
-      //   map.panTo(moveLatLon);
+      var moveLatLon = new kakao.maps.LatLng(37.575999, 126.97);
+      this.map.panTo(moveLatLon);
     },
   },
 };
