@@ -8,7 +8,8 @@
       </span>
       <span v-else><router-link to="/user/login">로그인</router-link>|</span>
       <router-link to="/regist">회원가입</router-link>|
-      <router-link to="/weather">날씨</router-link>
+      <router-link to="/weather">날씨</router-link>|
+      <router-link to="/maplist">지도</router-link>
     </nav>
   </header>
 </template>
