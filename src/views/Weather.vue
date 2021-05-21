@@ -1,24 +1,34 @@
 <template lang="">
     <div id="app"> 
         <main> 
-            <div class="search-box"> 
+            <div > 
                 <input 
                 type="text" 
-                class="search-bar" 
                 placeholder="Search..." 
                 v-model="query" 
                 @keypress="fetchWeather" 
                 /> 
             </div> 
-            <div class="weather-wrap" v-if="typeof weather.main != 'undefined'"> 
-                <div class="location-box"> 
-                    <div class="location">{{weather.name}}, {{weather.sys.country}}</div> 
-                    <div class="date">{{dateBuilder()}}</div> 
+            <div  v-if="typeof weather.main != 'undefined'"> 
+                <div> 
+                    <div>{{weather.name}}</div>
+                    <div v-if="weather.sys.country==='KR'">
+                        대한민국
+                    </div>
+                    <!-- <div> {{weather.sys.country}}</div> -->
+                    <div>{{dateBuilder()}}</div> 
                 </div> 
-                <div class="weather-box"> 
-                    <div class="temp">{{weather.main.temp}}℃</div> 
-                    <div class="weather">{{weather.weather[0].main}}</div> 
+                <div> 
+                    <div>{{weather.main.temp}}℃</div> 
+                    <div v-if="weather.weather[0].main==='Clouds'">
+                        흐림
+                    </div>
+                    <!-- <div>{{weather.weather[0].main}} </div> -->
                 </div> 
+                <div>
+                    <div>경도 {{weather.coord.lon}}</div>
+                    <div>위도 {{weather.coord.lat}}</div>
+                </div>
             </div> 
         </main> 
     </div>
@@ -43,7 +53,7 @@ export default {
         fetchWeather: function (e) { 
             if (e.key == "Enter") { 
                 let fetchUrl = 
-                `${this.url_base}weather?q=${this.query}&units=metric&APPID=${this.api_key}`;
+                `${this.url_base}weather?q=${this.query}&units=metric&lang=kr&APPID=${this.api_key}`;
                 fetch(fetchUrl) 
                 .then((res) => { 
                     console.log(res); 
@@ -62,33 +72,33 @@ export default {
         dateBuilder: function () { 
             let d = new Date(); 
             let months = [
-                "1월", 
-                "2월", 
-                "3월", 
-                "4월", 
-                "5월", 
-                "6월", 
-                "7월", 
-                "8월", 
-                "9월", 
-                "10월", 
-                "11월", 
-                "12월", 
+                "1", 
+                "2", 
+                "3", 
+                "4", 
+                "5", 
+                "6", 
+                "7", 
+                "8", 
+                "9", 
+                "10", 
+                "11", 
+                "12", 
             ]; 
             let days = [
-                "일요일", 
-                "월요일", 
-                "화요일", 
-                "수요일", 
-                "목요일", 
-                "금요일", 
-                "토요일", 
+                "일", 
+                "월", 
+                "화", 
+                "수", 
+                "목", 
+                "금", 
+                "토", 
             ]; 
             let day = days[d.getDay()]; 
             let date = d.getDate(); 
             let month = months[d.getMonth()]; 
             let year = d.getFullYear(); 
-            return `${day} ${date} ${month} ${year}`; 
+            return `${day}요일 ${date}일 ${month}월 ${year}년`; 
         }, 
     }, 
 };
