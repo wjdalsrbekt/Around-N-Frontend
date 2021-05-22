@@ -4,9 +4,9 @@
   </div>
 </template>
 <script>
-import BoardForm from '@/components/Board/BoardForm.vue';
+import BoardForm from "@/components/Board/BoardForm.vue";
 export default {
-  name: 'BoardCreate',
+  name: "BoardCreate",
   components: {
     BoardForm,
   },

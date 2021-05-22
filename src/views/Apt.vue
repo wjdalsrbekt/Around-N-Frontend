@@ -8,11 +8,11 @@
 </template>
 
 <script>
-import AptSearchBar from '@/components/Apt/AptSearchBar.vue';
-import AptList from '@/components/Apt/AptList.vue';
-import AptDetail from '@/components/Apt/AptDetail.vue';
+import AptSearchBar from "@/components/Apt/AptSearchBar.vue";
+import AptList from "@/components/Apt/AptList.vue";
+import AptDetail from "@/components/Apt/AptDetail.vue";
 export default {
-  name: 'Apt',
+  name: "Apt",
   components: {
     AptSearchBar,
     AptList,

@@ -18,7 +18,11 @@
         </thead>
         <tbody>
           <template v-for="(board, index) in boards">
-            <board-list-item :board="board" :key="index" v-if="board.title.includes(Sword)" />
+            <board-list-item
+              :board="board"
+              :key="index"
+              v-if="board.title.includes(Sword)"
+            />
             <!-- v-for="(board, index) in boards"
             :key="index" -->
             <!-- :bnum="board.bnum"
@@ -38,7 +42,13 @@
       <!-- <option value="content">내용</option> -->
       <!-- </select> -->
       <br />
-      <input type="text" placeholder="검색어 입력" name="word" id="word" v-model="Sword" />
+      <input
+        type="text"
+        placeholder="검색어 입력"
+        name="word"
+        id="word"
+        v-model="Sword"
+      />
       <!-- <button @click="searchBtn">검색</button> -->
       <!-- </form> -->
     </div>
@@ -48,17 +58,17 @@
 <script>
 // import { mapState } from 'vuex';
 // import { mapActions } from 'vuex';
-import http from '@/util/http-common';
-import BoardListItem from './BoardListItem.vue';
+import http from "@/util/http-common";
+import BoardListItem from "./BoardListItem.vue";
 export default {
-  name: 'BoardList',
+  name: "BoardList",
   data() {
     return {
-      boards: '',
-      Skey: '',
-      Sword: '',
-      Search: '',
-      loginCookie: '',
+      boards: "",
+      Skey: "",
+      Sword: "",
+      Search: "",
+      loginCookie: "",
     };
   },
   components: {
@@ -71,9 +81,9 @@ export default {
     movePage() {
       // console.log(this.loginCookie);
       if (this.loginCookie) {
-        this.$router.push('/board/create');
+        this.$router.push("/board/create");
       } else {
-        alert('로그인 한 회원만 사용가능합니다.');
+        alert("로그인 한 회원만 사용가능합니다.");
       }
     },
     // ...mapActions(['getBoardList']),
@@ -89,10 +99,10 @@ export default {
       // console.log(this.Skey);
       // console.log(this.Sword);
       http
-        .post('/board/list', {
+        .post("/board/list", {
           // params: this.Search,
-          key: '',
-          word: '',
+          key: "",
+          word: "",
         })
         .then((resp) => {
           // console.log('리스트들어옴');
@@ -125,7 +135,7 @@ export default {
     // this.$store.dispatch('getBoardList', { key: '', word: '' });
   },
   created() {
-    this.loginCookie = this.$cookie.get('userid');
+    this.loginCookie = this.$cookie.get("userid");
   },
 };
 </script>

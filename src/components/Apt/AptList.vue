@@ -27,15 +27,15 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
-import AptListItem from '@/components/Apt/AptListItem.vue';
+import { mapState } from "vuex";
+import AptListItem from "@/components/Apt/AptListItem.vue";
 export default {
-  name: 'AptList',
+  name: "AptList",
   components: {
     AptListItem,
   },
   computed: {
-    ...mapState(['apts']),
+    ...mapState(["apts"]),
   },
 };
 </script>

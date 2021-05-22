@@ -28,36 +28,36 @@
 </template>
 
 <script>
-import http from '@/util/http-common';
-import moment from 'moment';
+import http from "@/util/http-common";
+import moment from "moment";
 export default {
-  name: 'UserUpdate',
+  name: "UserUpdate",
   filters: {
     date(time) {
-      return moment(new Date(time)).format('l');
+      return moment(new Date(time)).format("l");
     },
   },
   data() {
     return {
-      userid: this.$cookie.get('userid'),
-      username: '',
-      userpwd: '',
-      email: '',
-      address: '',
-      joindate: '',
-      emailid: '',
-      emaildomain: '',
+      userid: this.$cookie.get("userid"),
+      username: "",
+      userpwd: "",
+      email: "",
+      address: "",
+      joindate: "",
+      emailid: "",
+      emaildomain: "",
     };
   },
   created() {
-    http.get('/user/' + this.userid).then(({ data }) => {
+    http.get("/user/" + this.userid).then(({ data }) => {
       console.log(data);
       this.username = data.username;
       this.userpwd = data.userpwd;
       this.address = data.address;
       this.email = data.email;
       this.joindate = data.joindate;
-      let array = data.email.split('@');
+      let array = data.email.split("@");
       this.emailid = array[0];
       this.emaildomain = array[1];
     });
@@ -65,23 +65,23 @@ export default {
   methods: {
     checkValue() {
       let err = true;
-      let msg = '';
+      let msg = "";
 
       if (!this.username) {
         err = false;
-        msg = '이름은 비울 수 없습니다.';
+        msg = "이름은 비울 수 없습니다.";
         this.$refs.username.focus();
       } else if (!this.userpwd) {
         err = false;
-        msg = '비밀번호를 입력해주세요.';
+        msg = "비밀번호를 입력해주세요.";
         this.$refs.userpwd.focus();
       } else if (!this.address) {
         err = false;
-        msg = '주소를 입력해주세요.';
+        msg = "주소를 입력해주세요.";
         this.$refs.address.focus();
       } else if (!this.emailid) {
         err = false;
-        msg = '이메일은 비울 수 없습니다.';
+        msg = "이메일은 비울 수 없습니다.";
         this.$refs.emailid.focus();
       }
 
@@ -90,18 +90,18 @@ export default {
     },
     modifyUser() {
       http
-        .put('/user', {
+        .put("/user", {
           userid: this.userid,
           username: this.username,
           userpwd: this.userpwd,
-          email: this.emailid + '@' + this.emaildomain,
+          email: this.emailid + "@" + this.emaildomain,
           address: this.address,
           joindate: this.joindate,
         })
         .then(({ data }) => {
-          let msg = '수정 처리 중 문제가 발생하였습니다.';
-          if (data === 'success') {
-            msg = '수정이 완료되었습니다.';
+          let msg = "수정 처리 중 문제가 발생하였습니다.";
+          if (data === "success") {
+            msg = "수정이 완료되었습니다.";
           }
 
           alert(msg);
@@ -109,24 +109,24 @@ export default {
         });
     },
     moveList() {
-      this.$router.push('/');
+      this.$router.push("/");
     },
     byeUser() {
-      let result = confirm('정말로 탈퇴하시겠습니까?');
+      let result = confirm("정말로 탈퇴하시겠습니까?");
       if (result) {
-        http.delete('/user/' + this.userid).then(({ data }) => {
-          let msg = '탈퇴 처리 중 문제가 발생했습니다.';
-          if (data === 'success') {
-            this.$cookie.delete('userid');
+        http.delete("/user/" + this.userid).then(({ data }) => {
+          let msg = "탈퇴 처리 중 문제가 발생했습니다.";
+          if (data === "success") {
+            this.$cookie.delete("userid");
             this.loginCookie = document.cookie;
-            msg = '탈퇴 되었습니다.';
+            msg = "탈퇴 되었습니다.";
           }
           alert(msg);
           this.$router.go(this.$router.currentRoute);
-          this.$router.push('/');
+          this.$router.push("/");
         });
       } else {
-        alert('취소되었습니다.');
+        alert("취소되었습니다.");
       }
     },
   },

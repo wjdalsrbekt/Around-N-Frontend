@@ -12,7 +12,6 @@
         <div>{{ weather.main.temp }}℃</div>
         <div v-if="weather.weather[0].main === 'Clouds'">흐림</div>
       </div>
-      
     </div>
     <hr />
     <div class="map_wrap">
@@ -191,7 +190,9 @@ export default {
 
       this.removeMarker();
 
-      this.ps.categorySearch(this.currCategory, this.placesSearchCB, { useMapBounds: true });
+      this.ps.categorySearch(this.currCategory, this.placesSearchCB, {
+        useMapBounds: true,
+      });
       //console.log(this.ps);
     },
     placesSearchCB(data, status, pagination) {

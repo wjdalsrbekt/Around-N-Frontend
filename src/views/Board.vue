@@ -6,10 +6,10 @@
 </template>
 <script>
 // import BoardSearchBar from '@/components/Board/BoardSearchBar.vue';
-import BoardList from '@/components/Board/BoardList.vue';
+import BoardList from "@/components/Board/BoardList.vue";
 
 export default {
-  name: 'Board',
+  name: "Board",
   components: {
     BoardList,
     // BoardSearchBar,

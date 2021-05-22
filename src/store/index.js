@@ -1,6 +1,6 @@
-import Vue from 'vue';
-import Vuex from 'vuex';
-import http from '@/util/http-common';
+import Vue from "vue";
+import Vuex from "vuex";
+import http from "@/util/http-common";
 // import PersistedState from 'vuex-persistedstate';
 // import axios from 'axios';
 
@@ -14,8 +14,8 @@ export default new Vuex.Store({
     apts: [],
     apt: Object,
     location: {
-      lat: '',
-      lon: '',
+      lat: "",
+      lon: "",
     },
     weather: Object,
   },
@@ -59,48 +59,53 @@ export default new Vuex.Store({
   },
   actions: {
     getWeather({ commit }, query) {
-      const api_key = 'd90fae9b96bf333ee127505adf090614';
-      const url_base = 'https://api.openweathermap.org/data/2.5/';
-      let fetchUrl = url_base + 'weather?q=' + query + '&units=metric&lang=kr&APPID=' + api_key;
+      const api_key = "d90fae9b96bf333ee127505adf090614";
+      const url_base = "https://api.openweathermap.org/data/2.5/";
+      let fetchUrl =
+        url_base +
+        "weather?q=" +
+        query +
+        "&units=metric&lang=kr&APPID=" +
+        api_key;
 
       fetch(fetchUrl)
         .then((res) => {
           return res.json();
         })
         .then((results) => {
-          commit('GET_WEATHER', results);
+          commit("GET_WEATHER", results);
         });
     },
     getAptList({ commit }, search) {
       http
-        .post('/tempview/list', {
+        .post("/tempview/list", {
           key: search.key,
           word: search.word,
         })
         .then(({ data }) => {
-          commit('GET_APT_LIST', data);
+          commit("GET_APT_LIST", data);
         })
         .catch((error) => {
           console.dir(error);
         });
     },
     selectApt({ commit }, apt) {
-      commit('SELECT_APT', apt);
+      commit("SELECT_APT", apt);
     },
     getBoardList({ commit }, search) {
       // console.log('리스트');
-      console.log('키값입니다...' + search.key);
-      console.log('워드값입니다...' + search.word);
+      console.log("키값입니다..." + search.key);
+      console.log("워드값입니다..." + search.word);
 
       http
-        .post('/board/list', {
+        .post("/board/list", {
           key: search.key,
           word: search.word,
         })
         .then((resp) => {
           // console.log('리스트들어옴');
           // console.log(resp);
-          commit('GET_BOARD_LIST', resp.data);
+          commit("GET_BOARD_LIST", resp.data);
         })
         .catch((error) => {
           console.dir(error);
@@ -108,11 +113,11 @@ export default new Vuex.Store({
     },
     getBoard({ commit }, bnum) {
       http
-        .get('/board/' + bnum)
+        .get("/board/" + bnum)
         .then((resp) => {
           // console.log('한 개 얻어감');
           // console.log(resp.data);
-          commit('GET_BOARD', resp.data);
+          commit("GET_BOARD", resp.data);
         })
         .catch((error) => {
           console.dir(error);
