@@ -48,8 +48,6 @@
             카페
           </li>
         </ul>
-        <!-- <button @click="onClickConv">편의점</button> -->
-        <!-- <button></button> -->
       </div>
     </div>
   </div>
