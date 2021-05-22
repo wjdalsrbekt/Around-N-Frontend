@@ -39,13 +39,29 @@
       </p>
       <div>
         <ul id="category">
-          <li id="CS2" data-order="0" @click="select">
+          <li id="BK9" data-order="0" @click="select">
             <span class="category_bg bank"></span>
-            편의점
+            은행
           </li>
-          <li id="CE7" data-order="1" @click="select">
+          <li id="MT1" data-order="1" @click="select">
+            <span class="category_bg mart"></span>
+            마트
+          </li>
+          <li id="PM9" data-order="2" @click="select">
+            <span class="category_bg pharmacy"></span>
+            약국
+          </li>
+          <li id="OL7" data-order="3" @click="select">
+            <span class="category_bg oil"></span>
+            주유소
+          </li>
+          <li id="CE7" data-order="4" @click="select">
             <span class="category_bg cafe"></span>
             카페
+          </li>
+          <li id="CS2" data-order="5" @click="select">
+            <span class="category_bg store"></span>
+            편의점
           </li>
         </ul>
       </div>
