@@ -23,7 +23,6 @@
                     <div v-if="weather.weather[0].main==='Clouds'">
                         흐림
                     </div>
-                    <!-- <div>{{weather.weather[0].main}} </div> -->
                 </div> 
                 <div>
                     <div>경도 {{weather.coord.lon}}</div>
@@ -34,10 +33,13 @@
     </div>
 </template>
 <script>
+
 export default { 
+    name : 'Weather',
     data: function () { 
         return { 
-            api_key: "d90fae9b96bf333ee127505adf090614", 
+            map:'',
+            api_key: `${process.env.VUE_APP_OPENWEAHTER_API_KEY}`, 
             //api_key에는 앞서 우리가 발급받은 API 키값을 넣기.
             url_base: "https://api.openweathermap.org/data/2.5/", 
             //url_base는 API를 호출할 URL임.
@@ -46,7 +48,8 @@ export default {
             weather: {}, 
             //weather은 검색 결과 데이터가 들어갈 공간.
             }; 
-        }, 
+        },
+  
     methods: { 
         //fetchWeather 함수는 search에 값을 입력하고 엔터를 누를 경우 해당 값을 사용해 날씨를 검색해오는 작업을 수행
         //내부에서 fetch 함수를 사용하고 있으며 수행 결과를 promise를 사용해 json으로 변환한 뒤 결과를 data에 저장하는 작업을 수행
