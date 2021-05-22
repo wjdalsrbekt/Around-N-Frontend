@@ -24,7 +24,6 @@
                         흐림
                     </div>
                 </div> 
-              
             </div> 
         </main> 
     </div>

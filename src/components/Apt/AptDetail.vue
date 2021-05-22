@@ -12,10 +12,7 @@
         <div>{{ weather.main.temp }}℃</div>
         <div v-if="weather.weather[0].main === 'Clouds'">흐림</div>
       </div>
-      <div>
-        <div>경도 {{ weather.coord.lon }}</div>
-        <div>위도 {{ weather.coord.lat }}</div>
-      </div>
+      
     </div>
     <hr />
     <div class="map_wrap">
