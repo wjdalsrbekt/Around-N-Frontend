@@ -178,10 +178,11 @@ export default {
 
       this.removeMarker();
 
-      this.ps.categorySearch(this.currCategory, this.placesSearchCB);
+      this.ps.categorySearch(this.currCategory, this.placesSearchCB, { useMapBounds: true });
       //console.log(this.ps);
     },
-    placesSearchCB(data, status) {
+    placesSearchCB(data, status, pagination) {
+      console.log(pagination);
       if (status === kakao.maps.services.Status.OK) {
         this.displayPlaces(data);
       }
