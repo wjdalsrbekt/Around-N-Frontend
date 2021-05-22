@@ -24,10 +24,7 @@
                         흐림
                     </div>
                 </div> 
-                <div>
-                    <div>경도 {{weather.coord.lon}}</div>
-                    <div>위도 {{weather.coord.lat}}</div>
-                </div>
+              
             </div> 
         </main> 
     </div>
