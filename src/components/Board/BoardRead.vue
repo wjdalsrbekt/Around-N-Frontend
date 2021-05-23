@@ -42,9 +42,7 @@
         <td>{{ item.user_name }}</td>
         <td>{{ item.comment_time | date }}</td>
         <!-- <button @click="modifyComment">수정</button> -->
-        <button @click="deleteComment(item.comment_no, item.user_name)">
-          삭제
-        </button>
+        <button @click="deleteComment(item.comment_no, item.user_name)">삭제</button>
       </tr>
     </table>
     <div>
@@ -74,47 +72,47 @@
   </div>
 </template>
 <script>
-import moment from "moment";
-import http from "@/util/http-common";
-import { mapState } from "vuex";
+import moment from 'moment';
+import http from '@/util/http-common';
+import { mapState } from 'vuex';
 // import { mapActions } from 'vuex';
 export default {
-  name: "BoardDetail",
+  name: 'BoardDetail',
   data() {
     return {
       // code: '',
-      comment: "",
-      comment_no: "",
-      user_name: "",
-      comment_content: "",
-      comment_time: "",
-      bnum: "",
-      loginCookie: "",
+      comment: '',
+      comment_no: '',
+      user_name: '',
+      comment_content: '',
+      comment_time: '',
+      bnum: '',
+      loginCookie: '',
     };
   },
   components: {},
   computed: {
-    ...mapState(["board"]),
+    ...mapState(['board']),
     // ...mapState(['board'], ['commments']),
   },
   filters: {
     price(value) {
       if (!value) return value;
-      return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
     },
     date(time) {
-      return moment(new Date(time)).format("MM-DD h:m a");
+      return moment(new Date(time)).format('MM-DD h:m a');
     },
   },
   created() {
     // console.log('들어옴');
     // console.log(this.$route.query.bnum);
-    this.$store.dispatch("getBoard", this.$route.query.bnum);
+    this.$store.dispatch('getBoard', this.$route.query.bnum);
     http.get(`/comment/${this.$route.query.bnum}`).then(({ data }) => {
       this.comment = data;
     });
     this.bnum = this.$route.query.bnum;
-    this.loginCookie = this.$cookie.get("userid");
+    this.loginCookie = this.$cookie.get('userid');
   },
   methods: {
     // ...mapActions(['deleteBoard']),
@@ -127,52 +125,56 @@ export default {
     //   this.$router.push('/board');
     // },
     checkValue() {
-      let err = true;
-      let msg = "";
+      if (this.loginCookie) {
+        let err = true;
+        let msg = '';
 
-      if (!this.comment_content) {
-        err = false;
-        msg = "내용을 입력해주세요.";
-        this.$refs.comment_content.focus();
+        if (!this.comment_content) {
+          err = false;
+          msg = '내용을 입력해주세요.';
+          this.$refs.comment_content.focus();
+        }
+        // else if (!this.user_name) {
+        //   err = false;
+        //   msg = '작성자를 입력해주세요.';
+        //   this.$refs.user_name.focus();
+        // }
+
+        if (!err) alert(msg);
+        else this.writeComment();
+      } else {
+        alert('댓글을 작성하려면 로그인 해주세요.');
       }
-      // else if (!this.user_name) {
-      //   err = false;
-      //   msg = '작성자를 입력해주세요.';
-      //   this.$refs.user_name.focus();
-      // }
-
-      if (!err) alert(msg);
-      else this.writeComment();
     },
     writeComment() {
       http
-        .post("/comment", {
+        .post('/comment', {
           comment_no: this.comment_no,
-          user_name: this.$cookie.get("userid"),
+          user_name: this.$cookie.get('userid'),
           comment_content: this.comment_content,
           comment_time: this.comment_time,
           bnum: this.bnum,
         })
         .then(({ data }) => {
-          let msg = "댓글 작성 중 문제가 발생했습니다.";
-          if (data === "success") {
-            msg = "등록이 완료되었습니다.";
+          let msg = '댓글 작성 중 문제가 발생했습니다.';
+          if (data === 'success') {
+            msg = '등록이 완료되었습니다.';
           }
           alert(msg);
           this.$router.go(this.$router.currentRoute);
         })
         .catch(() => {
-          this.$router.push("/board/list");
+          this.$router.push('/board/list');
         });
     },
     deleteComment(cnum, writer) {
-      if (writer != this.$cookie.get("userid")) {
-        alert("본인만 삭제를 할 수 있습니다.");
+      if (writer != this.$cookie.get('userid')) {
+        alert('본인만 삭제를 할 수 있습니다.');
       } else {
-        http.delete("/comment/" + cnum).then(({ data }) => {
-          let msg = "댓글 삭제 중 문제가 발생했습니다.";
-          if (data === "success") {
-            msg = "삭제가 완료되었습니다.";
+        http.delete('/comment/' + cnum).then(({ data }) => {
+          let msg = '댓글 삭제 중 문제가 발생했습니다.';
+          if (data === 'success') {
+            msg = '삭제가 완료되었습니다.';
           }
           alert(msg);
           this.$router.go(this.$router.currentRoute);
