@@ -238,7 +238,7 @@ export default {
       }
     },
     addMarker(position, order) {
-      var imageSrc = '../../assets/places_category.png', // 마커 이미지 url, 스프라이트 이미지를 씁니다
+      var imageSrc = 'https://lab.ssafy.com/at8in/finalhappyvue/uploads/54c41d8848753f2c4af92e215c3a22ce/places_category.png', // 마커 이미지 url, 스프라이트 이미지를 씁니다
         imageSize = new kakao.maps.Size(27, 28), // 마커 이미지의 크기
         imgOptions = {
           spriteSize: new kakao.maps.Size(72, 316), // 스프라이트 이미지의 크기
