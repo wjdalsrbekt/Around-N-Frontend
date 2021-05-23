@@ -1,23 +1,34 @@
 <template>
-  <div>
-    <label for="title">제목</label>
-    <input
-      type="text"
+  <div class="q-pa-md">
+    <q-input
+      outlined
       name="title"
       id="title"
+      lazy-rules
+      :rules="[(val) => (val && val.length > 0) || '제목은 비울 수 없습니다.']"
       v-model="title"
       ref="title"
-      placeholder="제목을 입력해주세요."
-    /><br />
-    <label for="price">문의가격</label>
-    <input
+      label="제목을 입력해주세요."
+    >
+      <template v-slot:append>
+        <q-icon name="title" />
+      </template> </q-input
+    ><br />
+    <q-input
+      outlined
       type="number"
       name="price"
       id="price"
       v-model="price"
       ref="price"
-      placeholder="가격을 입력해주세요."
-    /><br />
+      label="가격을 입력해주세요."
+      lazy-rules
+      :rules="[(val) => (val && val.length > 0) || '문의가격을 입력해주세요.']"
+    >
+      <template v-slot:append>
+        <q-icon name="sell" />
+      </template> </q-input
+    ><br />
     <label for="content">내용</label>
     <textarea
       name="content"
