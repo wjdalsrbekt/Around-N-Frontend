@@ -1,7 +1,9 @@
 <template>
-  <header>
-    <nav>
-      <router-link to="/">홈</router-link>|
+  <q-header class="bg-blue-grey-10 text-white shadow-2">
+    <q-toolbar>
+      <q-btn flat round dense icon="house" @click="goHome" />
+      &nbsp; HappyHouse
+      <q-space />
       <router-link to="/board">게시판</router-link> &nbsp;
       <span v-if="loginCookie">
         <a v-on:click.prevent="deleteCookie">로그아웃</a>|
@@ -14,27 +16,30 @@
       <!-- <router-link to="/maplistY">영주지도</router-link> -->
       | &nbsp;
       <router-link to="/apt">매물보러가기</router-link>
-    </nav>
-  </header>
+    </q-toolbar>
+  </q-header>
 </template>
 <script>
 export default {
-  name: "AppHeader",
+  name: 'AppHeader',
   data() {
     return {
       loginCookie: null,
     };
   },
   created() {
-    this.loginCookie = this.$cookie.get("userid");
+    this.loginCookie = this.$cookie.get('userid');
     console.log(document.cookie);
   },
   methods: {
     deleteCookie() {
-      this.$cookie.delete("userid");
+      this.$cookie.delete('userid');
       this.loginCookie = document.cookie;
-      alert("로그아웃 되었습니다.");
-      if (this.$route.path !== "/") this.$router.push("/");
+      alert('로그아웃 되었습니다.');
+      if (this.$route.path !== '/') this.$router.push('/');
+    },
+    goHome() {
+      this.$router.push('/');
     },
   },
 };

@@ -1,14 +1,30 @@
 <template>
   <div id="app">
-    <Header />
-    <router-view />
+    <div class="q-pa-md">
+      <q-layout view="hHh LpR fff">
+        <!--Header -->
+        <Header />
+        <!--Contents-->
+        <q-page-container>
+          <q-page style="padding-top: 60px">
+            <router-view />
+          </q-page>
+          <!--Footer -->
+          <hr />
+          <p class="text-overline">Copyright @ 2021 뭐시기</p>
+          <q-page-scroller position="bottom-right">
+            <q-btn fab icon="keyboard_arrow_up" color="amber-4" />
+          </q-page-scroller>
+        </q-page-container>
+      </q-layout>
+    </div>
   </div>
 </template>
 
 <script>
-import Header from "@/layout/Header.vue";
+import Header from '@/layout/Header.vue';
 export default {
-  name: "App",
+  name: 'App',
   components: {
     Header,
   },
