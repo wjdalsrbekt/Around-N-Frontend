@@ -18,57 +18,48 @@
         </thead>
         <tbody>
           <template v-for="(board, index) in boards">
-            <board-list-item
-              :board="board"
-              :key="index"
-              v-if="board.title.includes(Sword)"
-            />
-            <!-- v-for="(board, index) in boards"
-            :key="index" -->
-            <!-- :bnum="board.bnum"
-            :title="board.title"
-            :userid="board.userid"
-            :regdate="board.regdate" -->
+            <board-list-item :board="board" :key="index" v-if="board.title.includes(Sword)" />
           </template>
         </tbody>
       </table>
     </div>
     <div v-else>작성된 글이 없습니다.</div>
-    <button @click="movePage">작성</button>
+    <!--게시글 작성 시작-->
+    <q-btn icon="edit" color="blue-grey-6" label="작성" @click="movePage" />
+    <q-dialog v-model="alert">
+      <q-card class="bg-blue-grey-9">
+        <q-card-section class="text-lime-5">
+          <div class="text-h6 text-bold">경고</div>
+        </q-card-section>
+        <q-card-section class="q-pt-none text-subtitle2 text-white">
+          로그인된 회원만 글을 작성할 수 있습니다.</q-card-section
+        >
+        <q-card-actions align="right">
+          <q-btn flat label="OK" color="teal-3" v-close-popup />
+        </q-card-actions>
+      </q-card>
+    </q-dialog>
+    <!--게시글 작성 끝-->
     <div>
-      <!-- <form action="" id="searchform" method="get"> -->
-      <!-- <select name="key" id="key" v-model="Skey"> -->
-      <!-- <option value="id">아이디</option> -->
-      <!-- <option value="content">내용</option> -->
-      <!-- </select> -->
       <br />
-      <input
-        type="text"
-        placeholder="검색어 입력"
-        name="word"
-        id="word"
-        v-model="Sword"
-      />
-      <!-- <button @click="searchBtn">검색</button> -->
-      <!-- </form> -->
+      <input type="text" placeholder="검색어 입력" name="word" id="word" v-model="Sword" />
     </div>
   </div>
 </template>
 
 <script>
-// import { mapState } from 'vuex';
-// import { mapActions } from 'vuex';
-import http from "@/util/http-common";
-import BoardListItem from "./BoardListItem.vue";
+import http from '@/util/http-common';
+import BoardListItem from './BoardListItem.vue';
 export default {
-  name: "BoardList",
+  name: 'BoardList',
   data() {
     return {
-      boards: "",
-      Skey: "",
-      Sword: "",
-      Search: "",
-      loginCookie: "",
+      alert: false,
+      boards: '',
+      Skey: '',
+      Sword: '',
+      Search: '',
+      loginCookie: '',
     };
   },
   components: {
@@ -81,9 +72,10 @@ export default {
     movePage() {
       // console.log(this.loginCookie);
       if (this.loginCookie) {
-        this.$router.push("/board/create");
+        this.$router.push('/board/create');
       } else {
-        alert("로그인 한 회원만 사용가능합니다.");
+        this.alert = true;
+        // alert('로그인 한 회원만 사용가능합니다.');
       }
     },
     // ...mapActions(['getBoardList']),
@@ -99,10 +91,10 @@ export default {
       // console.log(this.Skey);
       // console.log(this.Sword);
       http
-        .post("/board/list", {
+        .post('/board/list', {
           // params: this.Search,
-          key: "",
-          word: "",
+          key: '',
+          word: '',
         })
         .then((resp) => {
           // console.log('리스트들어옴');
@@ -135,7 +127,7 @@ export default {
     // this.$store.dispatch('getBoardList', { key: '', word: '' });
   },
   created() {
-    this.loginCookie = this.$cookie.get("userid");
+    this.loginCookie = this.$cookie.get('userid');
   },
 };
 </script>

@@ -1,5 +1,7 @@
 <template>
   <div class="q-pa-md">
+    <p class="text-h5">게시글 작성</p>
+    <hr />
     <q-input
       outlined
       name="title"
@@ -12,8 +14,9 @@
     >
       <template v-slot:append>
         <q-icon name="title" />
-      </template> </q-input
-    ><br />
+      </template>
+    </q-input>
+    <br />
     <q-input
       outlined
       type="number"
@@ -27,9 +30,10 @@
     >
       <template v-slot:append>
         <q-icon name="sell" />
-      </template> </q-input
-    ><br />
-    <label for="content">내용</label>
+      </template>
+    </q-input>
+    <br />
+    <!-- <label for="content">내용</label>
     <textarea
       name="content"
       id="content"
@@ -39,7 +43,25 @@
       v-model="content"
       placeholder="내용은 비울 수 없습니다."
     ></textarea
-    ><br />
+    > -->
+
+    <q-editor
+      v-model="content"
+      :definitions="{
+        insert_img: {
+          tip: '사진 첨부',
+          icon: 'photo',
+          handler: this.insertImg,
+        },
+      }"
+      :toolbar="[
+        ['left', 'center', 'right', 'justify'],
+        ['bold', 'italic', 'underline', 'strike'],
+        ['undo', 'redo'],
+        ['insert_img'],
+      ]"
+    />
+    <br />
     <button v-if="type === 'create'" @click="checkValue">등록</button>
     <button v-else @click="checkValue">수정</button>
     <button @click="moveList">취소</button>
@@ -86,7 +108,7 @@ export default {
       } else if (!this.content) {
         err = false;
         msg = '내용 입력!!';
-        this.$refs.content.focus();
+        // this.$refs.content.focus();
       }
 
       if (!err) alert(msg);
@@ -113,6 +135,7 @@ export default {
           price: this.price,
           content: this.content,
           regdate: this.regdate,
+          // upfile: null,
         })
         .then(({ data }) => {
           let msg = '등록 처리 중 문제가 발생하였습니다.';
@@ -157,6 +180,26 @@ export default {
     },
     moveList() {
       this.$router.push('/board');
+    },
+    insertImg() {
+      const input = document.createElement('input');
+      input.type = 'file';
+      input.accept = '.png,.jpg';
+
+      let file = (input.onchange = () => {
+        const files = Array.from(input.files);
+        file = files[0];
+
+        const reader = new FileReader();
+        let dataUrl = '';
+        reader.onloadend = () => {
+          dataUrl = reader.result;
+          this.content += '<div><img style="max-width: 50px;" src="' + dataUrl + '" /></div>';
+        };
+        reader.readAsDataURL(file);
+        console.log(this.content);
+      });
+      input.click();
     },
   },
   created() {

@@ -9,10 +9,13 @@
         <th>제목</th>
         <td>{{ board.title }}</td>
       </tr>
-      <tr>
+      <!-- <tr>
         <th>내용</th>
         <td>{{ board.content }}</td>
-      </tr>
+      </tr> -->
+      <q-card flat bordered>
+        <q-card-section v-html="content" />
+      </q-card>
       <tr>
         <th>작성자</th>
         <td>{{ board.userid }}</td>
@@ -30,7 +33,15 @@
       <a v-if="board.userid === this.loginCookie">
         <router-link :to="'/board/update?bnum=' + board.bnum">수정</router-link>
         <!-- <button @click="deleteItem">삭제</button> -->
-        <router-link :to="'/board/delete?bnum=' + board.bnum">삭제</router-link>
+        <q-btn
+          icon="clear"
+          text-color="deep-orange"
+          color="amber-4"
+          class="text-bold"
+          @click="showLoading"
+          label="삭제"
+        />
+        <!-- <router-link :to="'/board/delete?bnum=' + board.bnum">삭제</router-link> -->
       </a>
     </div>
     <hr />
@@ -56,16 +67,6 @@
         placeholder="댓글 내용을 입력하세요."
       />
       <br />
-      <!--여기!!!! -->
-      <!-- <label for="user_name">작성자</label>
-      <input
-        type="text"
-        name="user_name"
-        id="user_name"
-        v-model="user_name"
-        ref="user_name"
-        placeholder="ssafy"
-      /> -->
       <button @click="checkValue">작성</button>
       <br />
     </div>
@@ -88,6 +89,7 @@ export default {
       comment_time: '',
       bnum: '',
       loginCookie: '',
+      content: '',
     };
   },
   components: {},
@@ -113,6 +115,7 @@ export default {
     });
     this.bnum = this.$route.query.bnum;
     this.loginCookie = this.$cookie.get('userid');
+    this.content = this.$store.state.board.content;
   },
   methods: {
     // ...mapActions(['deleteBoard']),
@@ -179,6 +182,21 @@ export default {
           alert(msg);
           this.$router.go(this.$router.currentRoute);
         });
+      }
+    },
+    showLoading() {
+      this.$q.loading.show();
+
+      this.timer = setTimeout(() => {
+        this.$router.push('/board/delete?bnum=' + this.bnum);
+        this.$q.loading.hide();
+        this.timer = void 0;
+      }, 2000);
+    },
+    beforeDestroy() {
+      if (this.timer !== void 0) {
+        clearTimeout(this.timer);
+        this.$q.loading.hide();
       }
     },
   },
