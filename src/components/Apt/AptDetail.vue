@@ -66,16 +66,17 @@
             <span class="category_bg store"></span>
             편의점
           </li>
+          <!-- 신규-->
           <li id="FD6" data-order="6" @click="select">
-            <span class="category_bg store"></span>
+            <span class="category_bg food"></span>
             음식점
           </li>
           <li id="SW8" data-order="7" @click="select">
-            <span class="category_bg store"></span>
+            <span class="category_bg train"></span>
             지하철역
           </li>
           <li id="CT1" data-order="8" @click="select">
-            <span class="category_bg store"></span>
+            <span class="category_bg culture"></span>
             문화시설
           </li>
         </ul>
@@ -223,7 +224,6 @@ export default {
       }
     },
     displayPlaces(places) {
-      console.log(places);
       for (var i = 0; i < places.length; i++) {
         var marker = this.addMarker(
           new kakao.maps.LatLng(places[i].y, places[i].x),
@@ -238,10 +238,10 @@ export default {
       }
     },
     addMarker(position, order) {
-      var imageSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/places_category.png', // 마커 이미지 url, 스프라이트 이미지를 씁니다
+      var imageSrc = '../../assets/places_category.png', // 마커 이미지 url, 스프라이트 이미지를 씁니다
         imageSize = new kakao.maps.Size(27, 28), // 마커 이미지의 크기
         imgOptions = {
-          spriteSize: new kakao.maps.Size(72, 208), // 스프라이트 이미지의 크기
+          spriteSize: new kakao.maps.Size(72, 316), // 스프라이트 이미지의 크기
           spriteOrigin: new kakao.maps.Point(46, order * 36), // 스프라이트 이미지 중 사용할 영역의 좌상단 좌표
           offset: new kakao.maps.Point(11, 28), // 마커 좌표에 일치시킬 이미지 내에서의 좌표
         },
@@ -421,8 +421,7 @@ export default {
   height: 28px;
 }
 #category li .category_bg {
-  background: url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/places_category.png)
-    no-repeat;
+  background: url(../../assets/places_category.png) no-repeat;
 }
 #category li .bank {
   background-position: -10px 0;
@@ -441,6 +440,15 @@ export default {
 }
 #category li .store {
   background-position: -10px -180px;
+}
+#category li .food {
+  background-position: -10px -216px;
+}
+#category li .train {
+  background-position: -10px -252px;
+}
+#category li .culture {
+  background-position: -10px -288px;
 }
 #category li.on .category_bg {
   background-position-x: -46px;
