@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="q-pa-md">
     {{ apt }} <br />
     {{ location }} <br />
     <div v-if="typeof weather.main != 'undefined'">
@@ -30,8 +30,15 @@
         /></span>
       </div>
       <p>
-        <input type="checkbox" id="chkTraffic" @click="setOverlayMapTypeId" />교통정보 보기
-        <input type="checkbox" id="chkBicycle" @click="setOverlayMapTypeId" />자전거도로 정보 보기
+        <label class="text-caption">
+          <q-toggle v-model="value1" color="amber-4" keep-color @input="setOverlayMapTypeId" />
+          교통정보
+        </label>
+        &nbsp;
+        <label class="text-caption">
+          <q-toggle v-model="value2" color="teal-3" keep-color @input="setOverlayMapTypeId" />
+          자전거도로
+        </label>
       </p>
       <div>
         <ul id="category">
@@ -81,6 +88,8 @@ export default {
       markers: [],
       className: '',
       dataOrder: '',
+      value1: false,
+      value2: false,
     };
   },
   mounted() {
@@ -290,15 +299,13 @@ export default {
       this.map.setLevel(level + 1);
     },
     setOverlayMapTypeId() {
-      var chkTraffic = document.getElementById('chkTraffic'),
-        chkBicycle = document.getElementById('chkBicycle');
-      if (chkTraffic.checked) {
+      if (this.value1) {
         this.map.addOverlayMapTypeId(kakao.maps.MapTypeId.TRAFFIC);
       } else {
         this.map.removeOverlayMapTypeId(kakao.maps.MapTypeId.TRAFFIC);
       }
 
-      if (chkBicycle.checked) {
+      if (this.value2) {
         this.map.addOverlayMapTypeId(kakao.maps.MapTypeId.BICYCLE);
       } else {
         this.map.removeOverlayMapTypeId(kakao.maps.MapTypeId.BICYCLE);

@@ -4,18 +4,14 @@
       <q-btn flat round dense icon="house" @click="goHome" />
       &nbsp; HappyHouse
       <q-space />
-      <router-link to="/board">게시판</router-link> &nbsp;
-      <span v-if="loginCookie">
-        <a v-on:click.prevent="deleteCookie">로그아웃</a>|
-        <router-link to="/user/update">정보수정</router-link>|
-      </span>
-      <span v-else><router-link to="/user/login">로그인</router-link>|</span>
-      <router-link to="/regist">회원가입</router-link>|
-      <router-link to="/weather">날씨</router-link>|
-      <router-link to="/maplist">지도</router-link>
-      <!-- <router-link to="/maplistY">영주지도</router-link> -->
-      | &nbsp;
-      <router-link to="/apt">매물보러가기</router-link>
+      <q-tabs active-color="lime-5">
+        <q-route-tab label="게시판" to="/board" />
+        <q-tab v-if="loginCookie" label="로그아웃" @click="deleteCookie" />
+        <q-route-tab v-if="loginCookie" label="회원정보" to="/user/update" />
+        <q-route-tab v-if="!loginCookie" label="로그인" to="/user/login" />
+        <q-route-tab v-if="!loginCookie" label="회원가입" to="/regist" />
+        <q-route-tab label="매물" to="/apt" />
+      </q-tabs>
     </q-toolbar>
   </q-header>
 </template>
@@ -40,6 +36,9 @@ export default {
     },
     goHome() {
       this.$router.push('/');
+    },
+    hum() {
+      console.log(this.tab);
     },
   },
 };
