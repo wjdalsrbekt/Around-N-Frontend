@@ -66,6 +66,18 @@
             <span class="category_bg store"></span>
             편의점
           </li>
+          <li id="FD6" data-order="6" @click="select">
+            <span class="category_bg store"></span>
+            음식점
+          </li>
+          <li id="SW8" data-order="7" @click="select">
+            <span class="category_bg store"></span>
+            지하철역
+          </li>
+          <li id="CT1" data-order="8" @click="select">
+            <span class="category_bg store"></span>
+            문화시설
+          </li>
         </ul>
       </div>
     </div>
@@ -211,6 +223,7 @@ export default {
       }
     },
     displayPlaces(places) {
+      console.log(places);
       for (var i = 0; i < places.length; i++) {
         var marker = this.addMarker(
           new kakao.maps.LatLng(places[i].y, places[i].x),
