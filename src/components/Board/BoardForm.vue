@@ -222,41 +222,39 @@ export default {
           .catch(() => {
             this.moveList();
           });*/
-<<<<<<< HEAD
-          const formData = new FormData();
-      formData.append('bnum', this.$route.query.bnum);
-  
-      formData.append('title', this.title);
-      formData.append('userid', this.$cookie.get('userid'));
-      formData.append('price', this.price);
-      formData.append('content', this.content);
-      formData.append('regdate', new Date());
-      formData.append('upfile', this.upfile);
-       http
-        .put(
-          '/board',
-          // {
-          //   bnum: this.bnum,
-          //   title: this.title,
-          //   // userid: this.userid,
-          //   userid: this.$cookie.get('userid'),
-          //   price: this.price,
-          //   content: this.content,
-          //   regdate: this.regdate,
-          //   upfile: this.upfile,
-          // },
-          formData,
-          {
-            headers: {
-              'Content-Type': 'multipart/form-data; charset=utf-8;',
-            },
-          }
-        )
-        .then(({ data }) => {
-          let msg = '수정 처리 중 문제가 발생하였습니다.';
-          if (data === 'success') {
-            msg = '수정이 완료되었습니다.';
-          }
+        const formData = new FormData();
+        formData.append('bnum', this.$route.query.bnum);
+        formData.append('title', this.title);
+        formData.append('userid', this.$cookie.get('userid'));
+        formData.append('price', this.price);
+        formData.append('content', this.content);
+        formData.append('regdate', new Date());
+        formData.append('upfile', this.upfile);
+        http
+          .put(
+            '/board',
+            // {
+            //   bnum: this.bnum,
+            //   title: this.title,
+            //   // userid: this.userid,
+            //   userid: this.$cookie.get('userid'),
+            //   price: this.price,
+            //   content: this.content,
+            //   regdate: this.regdate,
+            //   upfile: this.upfile,
+            // },
+            formData,
+            {
+              headers: {
+                'Content-Type': 'multipart/form-data; charset=utf-8;',
+              },
+            }
+          )
+          .then(({ data }) => {
+            let msg = '수정 처리 중 문제가 발생하였습니다.';
+            if (data === 'success') {
+              msg = '수정이 완료되었습니다.';
+            }
 
             alert(msg);
             this.moveList();
