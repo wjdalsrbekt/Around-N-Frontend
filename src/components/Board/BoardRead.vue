@@ -193,12 +193,12 @@ export default {
         this.timer = void 0;
       }, 2000);
     },
-    beforeDestroy() {
-      if (this.timer !== void 0) {
-        clearTimeout(this.timer);
-        this.$q.loading.hide();
-      }
-    },
+  },
+  beforeDestroy() {
+    if (this.timer !== void 0) {
+      clearTimeout(this.timer);
+      this.$q.loading.hide();
+    }
   },
 };
 </script>

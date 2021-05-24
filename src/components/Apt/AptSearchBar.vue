@@ -13,7 +13,14 @@
       placeholder="검색어 입력."
       @keypress.enter="checkValue"
     />
-    <button @click="checkValue">검색</button>
+    <q-btn
+      icon="search"
+      label="검색"
+      text-color="white"
+      color="blue-grey-6"
+      class="text-bold"
+      @click="checkValue"
+    />
   </div>
 </template>
 <script>
@@ -44,12 +51,24 @@ export default {
       else this.sendKeyword();
     },
     sendKeyword() {
-      this.getAptList({ key: this.key, word: this.word });
-      if (this.key === 'dong') {
-        this.getWeather(this.word);
-      }
-      this.word = '';
+      this.$q.loading.show();
+
+      this.timer = setTimeout(() => {
+        this.getAptList({ key: this.key, word: this.word });
+        if (this.key === 'dong') {
+          this.getWeather(this.word);
+        }
+        this.word = '';
+        this.$q.loading.hide();
+        this.timer = void 0;
+      }, 1500);
     },
+  },
+  beforeDestroy() {
+    if (this.timer !== void 0) {
+      clearTimeout(this.timer);
+      this.$q.loading.hide();
+    }
   },
 };
 </script>
