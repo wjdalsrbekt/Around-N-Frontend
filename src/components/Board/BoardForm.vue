@@ -5,6 +5,7 @@
     <q-input
       outlined
       name="title"
+      color="teal-3"
       id="title"
       lazy-rules
       :rules="[(val) => (val && val.length > 0) || '제목은 비울 수 없습니다.']"
@@ -21,6 +22,7 @@
       outlined
       type="number"
       name="price"
+      color="teal-3"
       id="price"
       v-model="price"
       ref="price"
@@ -44,21 +46,37 @@
       placeholder="내용은 비울 수 없습니다."
     ></textarea
     > -->
+    <q-file
+      color="teal-3"
+      v-model="upfile"
+      label="추가사진 (.jpg , .png, .gif)(5MB)"
+      outlined
+      accept=".jpg,.png,.gif"
+      max-file-size="5120000"
+    >
+      <template v-slot:append>
+        <q-icon name="image" />
+      </template>
+    </q-file>
+
+    <br />
 
     <q-editor
       v-model="content"
       :definitions="{
-        insert_img: {
+        /*
+          insert_img: {
           tip: '사진 첨부',
           icon: 'photo',
           handler: this.insertImg,
         },
+          */
       }"
       :toolbar="[
         ['left', 'center', 'right', 'justify'],
         ['bold', 'italic', 'underline', 'strike'],
         ['undo', 'redo'],
-        ['insert_img'],
+        //['insert_img'],
       ]"
     />
     <br />
@@ -89,6 +107,7 @@ export default {
       price: '',
       content: '',
       regdate: '',
+      upfile: null,
     };
   },
   methods: {
@@ -126,17 +145,44 @@ export default {
       // });
       // alert('등록되었습니다.');
       // this.moveList();
+      console.log(this.upfile);
+
+      const formData = new FormData();
+      // formData.append('bnum', this.bnum);
+      formData.append('title', this.title);
+      formData.append('userid', this.$cookie.get('userid'));
+      formData.append('price', this.price);
+      formData.append('content', this.content);
+      formData.append('regdate', new Date());
+      formData.append('upfile', this.upfile);
+
+      console.log('흠...');
+      console.log(formData);
+
+      for (let key of formData.values()) {
+        console.log(`${key}`);
+      }
+
       http
-        .post('/board', {
-          bnum: this.bnum,
-          title: this.title,
-          // userid: this.userid,
-          userid: this.$cookie.get('userid'),
-          price: this.price,
-          content: this.content,
-          regdate: this.regdate,
-          // upfile: null,
-        })
+        .post(
+          '/board',
+          // {
+          //   bnum: this.bnum,
+          //   title: this.title,
+          //   // userid: this.userid,
+          //   userid: this.$cookie.get('userid'),
+          //   price: this.price,
+          //   content: this.content,
+          //   regdate: this.regdate,
+          //   upfile: this.upfile,
+          // },
+          formData,
+          {
+            headers: {
+              'Content-Type': 'multipart/form-data; charset=utf-8;',
+            },
+          }
+        )
         .then(({ data }) => {
           let msg = '등록 처리 중 문제가 발생하였습니다.';
           if (data === 'success') {
@@ -181,26 +227,26 @@ export default {
     moveList() {
       this.$router.push('/board');
     },
-    insertImg() {
-      const input = document.createElement('input');
-      input.type = 'file';
-      input.accept = '.png,.jpg';
+    // insertImg() {
+    //   const input = document.createElement('input');
+    //   input.type = 'file';
+    //   input.accept = '.png,.jpg';
 
-      let file = (input.onchange = () => {
-        const files = Array.from(input.files);
-        file = files[0];
+    //   let file = (input.onchange = () => {
+    //     const files = Array.from(input.files);
+    //     file = files[0];
 
-        const reader = new FileReader();
-        let dataUrl = '';
-        reader.onloadend = () => {
-          dataUrl = reader.result;
-          this.content += '<div><img style="max-width: 50px;" src="' + dataUrl + '" /></div>';
-        };
-        reader.readAsDataURL(file);
-        console.log(this.content);
-      });
-      input.click();
-    },
+    //     const reader = new FileReader();
+    //     let dataUrl = '';
+    //     reader.onloadend = () => {
+    //       dataUrl = reader.result;
+    //       this.content += '<div><img style="max-width: 50px;" src="' + dataUrl + '" /></div>';
+    //     };
+    //     reader.readAsDataURL(file);
+    //     console.log(this.content);
+    //   });
+    //   input.click();
+    // },
   },
   created() {
     if (this.type === 'update') {
