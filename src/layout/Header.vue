@@ -2,7 +2,7 @@
   <q-header class="bg-blue-grey-10 text-white shadow-2">
     <q-toolbar>
       <q-btn flat round dense icon="house" @click="goHome" />
-      &nbsp; HappyHouse
+      &nbsp; Around:N
       <q-space />
       <q-tabs active-color="lime-5">
         <q-route-tab label="게시판" to="/board" />

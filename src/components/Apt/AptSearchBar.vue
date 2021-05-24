@@ -1,9 +1,15 @@
 <template>
-  <div>
-    <select name="key" id="key" v-model="key">
-      <option value="dong">동</option>
-      <option value="aptName">아파트 이름</option>
-    </select>
+  <div class="q-pa-md">
+    <q-select
+      outlined
+      v-model="model"
+      :options="options"
+      option-value="id"
+      option-label="desc"
+      emit-value
+      map-options
+      style="width: 150px"
+    />
     <input
       type="text"
       name="word"
@@ -31,6 +37,17 @@ export default {
     return {
       key: '',
       word: '',
+      model: null,
+      options: [
+        {
+          id: 'dong',
+          desc: '동',
+        },
+        {
+          id: 'aptName',
+          desc: '아파트 이름',
+        },
+      ],
     };
   },
   methods: {
@@ -38,7 +55,7 @@ export default {
     checkValue() {
       let err = true;
       let msg = '';
-      if (!this.key) {
+      if (!this.model) {
         err = false;
         msg = '동이나 아파트 이름을 선택해주세요.';
       } else if (!this.word) {
@@ -54,11 +71,11 @@ export default {
       this.$q.loading.show();
 
       this.timer = setTimeout(() => {
-        this.getAptList({ key: this.key, word: this.word });
-        if (this.key === 'dong') {
-          this.getWeather(this.word);
+        this.getAptList({ key: this.model, word: this.word });
+        if (this.model === 'dong') {
+          this.getWeather(this.model);
         }
-        this.word = '';
+        this.model = null;
         this.$q.loading.hide();
         this.timer = void 0;
       }, 1500);

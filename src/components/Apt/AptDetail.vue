@@ -407,7 +407,7 @@ export default {
   background: #eee;
 }
 #category li:hover {
-  background: #ffe6e6;
+  background: #f4f5cd;
   border-left: 1px solid #acacac;
   margin-left: -1px;
 }
