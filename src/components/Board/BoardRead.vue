@@ -44,6 +44,11 @@
         <!-- <router-link :to="'/board/delete?bnum=' + board.bnum">삭제</router-link> -->
       </a>
     </div>
+    <!-- {{ file.saveFile }}
+    <div v-if="file != ''">
+      <img :src="image + '/' + file.saveFolder + '/' + file.saveFile" />
+    </div> -->
+
     <hr />
     <!--댓글 시작 -->
     <h3>댓글[{{ comment.length }}]</h3>
@@ -90,11 +95,13 @@ export default {
       bnum: '',
       loginCookie: '',
       content: '',
+      file: '',
+      // image: require('../../../../../work-spring/Final_HappyBack/src/main/webapp/upload/'),
     };
   },
   components: {},
   computed: {
-    ...mapState(['board']),
+    ...mapState(['board'], ['file']),
     // ...mapState(['board'], ['commments']),
   },
   filters: {
@@ -110,12 +117,14 @@ export default {
     // console.log('들어옴');
     // console.log(this.$route.query.bnum);
     this.$store.dispatch('getBoard', this.$route.query.bnum);
+    this.$store.dispatch('getFile', this.$route.query.bnum);
     http.get(`/comment/${this.$route.query.bnum}`).then(({ data }) => {
       this.comment = data;
     });
     this.bnum = this.$route.query.bnum;
     this.loginCookie = this.$cookie.get('userid');
     this.content = this.$store.state.board.content;
+    this.file = this.$store.state.file;
   },
   methods: {
     // ...mapActions(['deleteBoard']),
