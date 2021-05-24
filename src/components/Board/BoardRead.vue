@@ -44,10 +44,13 @@
         <!-- <router-link :to="'/board/delete?bnum=' + board.bnum">삭제</router-link> -->
       </a>
     </div>
-    <!-- {{ file.saveFile }}
+    <!-- {{ getUrl() }} -->
     <div v-if="file != ''">
-      <img :src="image + '/' + file.saveFolder + '/' + file.saveFile" />
-    </div> -->
+      <img :src="image" />
+      <!-- <img
+        src="../../../../../work-spring/Final_HappyBack/src/main/webapp/upload/210524/78305ecf-4923-4e63-8a2b-206a1f332da2.png"
+      /> -->
+    </div>
 
     <hr />
     <!--댓글 시작 -->
@@ -96,7 +99,10 @@ export default {
       loginCookie: '',
       content: '',
       file: '',
-      // image: require('../../../../../work-spring/Final_HappyBack/src/main/webapp/upload/'),
+      image: require('../../../../../upload/' +
+        this.$store.state.file.saveFolder +
+        '/' +
+        this.$store.state.file.saveFile),
     };
   },
   components: {},
@@ -201,6 +207,14 @@ export default {
         this.$q.loading.hide();
         this.timer = void 0;
       }, 2000);
+    },
+    getUrl() {
+      return (
+        '../../../../../work-spring/Final_HappyBack/src/main/webapp/upload/' +
+        this.file.saveFolder +
+        '/' +
+        this.file.saveFile
+      );
     },
   },
   beforeDestroy() {
