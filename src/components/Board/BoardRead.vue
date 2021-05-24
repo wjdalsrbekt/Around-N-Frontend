@@ -44,12 +44,8 @@
         <!-- <router-link :to="'/board/delete?bnum=' + board.bnum">삭제</router-link> -->
       </a>
     </div>
-    <!-- {{ getUrl() }} -->
-    <div v-if="file != ''">
+    <div v-if="image">
       <img :src="image" />
-      <!-- <img
-        src="../../../../../work-spring/Final_HappyBack/src/main/webapp/upload/210524/78305ecf-4923-4e63-8a2b-206a1f332da2.png"
-      /> -->
     </div>
 
     <hr />
@@ -99,15 +95,12 @@ export default {
       loginCookie: '',
       content: '',
       file: '',
-      image: require('../../../../../upload/' +
-        this.$store.state.file.saveFolder +
-        '/' +
-        this.$store.state.file.saveFile),
+      image: null,
     };
   },
   components: {},
   computed: {
-    ...mapState(['board'], ['file']),
+    ...mapState(['board'], ['file'], ['comments']),
     // ...mapState(['board'], ['commments']),
   },
   filters: {
@@ -124,13 +117,22 @@ export default {
     // console.log(this.$route.query.bnum);
     this.$store.dispatch('getBoard', this.$route.query.bnum);
     this.$store.dispatch('getFile', this.$route.query.bnum);
+    // this.$store.dispatch('getComments', this.$route.query.bnum);
     http.get(`/comment/${this.$route.query.bnum}`).then(({ data }) => {
       this.comment = data;
     });
     this.bnum = this.$route.query.bnum;
     this.loginCookie = this.$cookie.get('userid');
+    // this.comment = this.$store.state.comments;
     this.content = this.$store.state.board.content;
     this.file = this.$store.state.file;
+
+    if (this.$store.state.file.saveFolder != null && this.$store.state.file.saveFile != null) {
+      this.image = require('../../../../../work-spring/Final_HappyBack/src/main/webapp/upload/' +
+        this.$store.state.file.saveFolder +
+        '/' +
+        this.$store.state.file.saveFile);
+    }
   },
   methods: {
     // ...mapActions(['deleteBoard']),
@@ -207,14 +209,6 @@ export default {
         this.$q.loading.hide();
         this.timer = void 0;
       }, 2000);
-    },
-    getUrl() {
-      return (
-        '../../../../../work-spring/Final_HappyBack/src/main/webapp/upload/' +
-        this.file.saveFolder +
-        '/' +
-        this.file.saveFile
-      );
     },
   },
   beforeDestroy() {

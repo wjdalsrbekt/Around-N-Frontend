@@ -35,7 +35,7 @@ export default {
       if (this.$route.path !== '/') this.$router.push('/');
     },
     goHome() {
-      this.$router.push('/');
+      if (this.$route.path !== '/') this.$router.push('/');
     },
     hum() {
       console.log(this.tab);

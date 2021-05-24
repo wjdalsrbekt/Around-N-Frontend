@@ -10,7 +10,7 @@ export default new Vuex.Store({
   state: {
     boards: [],
     board: Object,
-    // comments: [],
+    comments: [],
     apts: [],
     apt: Object,
     location: {
@@ -46,6 +46,9 @@ export default new Vuex.Store({
     GET_FILE(state, file) {
       console.log(file);
       state.file = file;
+    },
+    GET_COMMENTS(state, comments) {
+      state.comments = comments;
     },
     // DELETE_BOARD(state, result) {
     //   if (result === 'success') {
@@ -128,6 +131,17 @@ export default new Vuex.Store({
         .get('/board/download/' + bnum)
         .then((resp) => {
           commit('GET_FILE', resp.data);
+        })
+        .catch((error) => {
+          console.dir(error);
+        });
+    },
+    getComments({ commit }, bnum) {
+      http
+        .get('/comment/' + bnum)
+        .then(({ data }) => {
+          console.log(data);
+          commit('GET_COMMENTS', data);
         })
         .catch((error) => {
           console.dir(error);
