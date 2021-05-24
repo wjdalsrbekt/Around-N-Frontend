@@ -1,37 +1,49 @@
 <template>
-  <div>
+  <div class="q-pa-md">
     <q-card>
-    <br/>
-    <p class="text-h5" for="userid"> 아이디  </p>
-    <q-card-section>
-    <q-input
-      ref="userid"
-      type="text"
-      v-model="userid"
-      name="userid"
-      id="userid"
-      placeholder="아이디 입력"
-      label="아이디 입력해주세요."
-    />
-    <br />
-    </q-card-section>
-    <p class="text-h5" for="userpwd"> 비밀번호 </p>
-     <q-card-section> 
-    <q-input
-      ref="userpwd"
-      type="password"
-      v-model="userpwd"
-      name="userpwd"
-      id="userpwd"
-      placeholder="비밀번호 입력"
-      label="비밀번호 입력해주세요."
-    />
-     </q-card-section>
-    <br />
-    
+      <br />
+      <p class="text-h5" for="userid">아이디</p>
+      <q-card-section>
+        <q-input
+          ref="userid"
+          type="text"
+          v-model="userid"
+          name="userid"
+          id="userid"
+          placeholder="아이디 입력"
+          lazy-rules
+          :rules="[(val) => (val && val.length > 0) || '필수입력 사항입니다.']"
+          label="아이디를 입력해주세요."
+        />
+        <br />
+      </q-card-section>
+      <p class="text-h5" for="userpwd">비밀번호</p>
+      <q-card-section>
+        <q-input
+          ref="userpwd"
+          type="password"
+          v-model="userpwd"
+          name="userpwd"
+          id="userpwd"
+          lazy-rules
+          :rules="[(val) => (val && val.length > 0) || '필수입력 사항입니다.']"
+          placeholder="비밀번호 입력"
+          label="비밀번호를 입력해주세요."
+        />
+      </q-card-section>
+      <br />
+
+      <q-btn
+        icon="login"
+        text-color="white"
+        label="로그인"
+        color="blue-grey-6"
+        class="text-bold"
+        @click="login"
+      />
+      <br />
+      <br />
     </q-card>
-    <br />
-    <q-btn color="lime-5" @click="login">로그인</q-btn>
   </div>
 </template>
 
