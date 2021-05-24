@@ -222,6 +222,7 @@ export default {
           .catch(() => {
             this.moveList();
           });*/
+<<<<<<< HEAD
           const formData = new FormData();
       formData.append('bnum', this.$route.query.bnum);
   
@@ -257,14 +258,13 @@ export default {
             msg = '수정이 완료되었습니다.';
           }
 
-          alert(msg);
-          this.moveList();
-        })
-        .catch(() => {
-          this.moveList();
-        });
+            alert(msg);
+            this.moveList();
+          })
+          .catch(() => {
+            this.moveList();
+          });
       }
-      
     },
     moveList() {
       this.$router.push('/board');
