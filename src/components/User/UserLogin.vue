@@ -44,6 +44,28 @@
       <br />
       <br />
     </q-card>
+    <q-dialog v-model="alert">
+      <q-card class="bg-blue-grey-9">
+        <q-card-section class="text-lime-5">
+          <div class="text-h6 text-bold">알림</div>
+        </q-card-section>
+        <q-card-section class="q-pt-none text-subtitle2 text-white"> {{ msg }}</q-card-section>
+        <q-card-actions align="right">
+          <q-btn flat label="OK" color="teal-3" @click="goList" />
+        </q-card-actions>
+      </q-card>
+    </q-dialog>
+    <q-dialog v-model="alert2">
+      <q-card class="bg-blue-grey-9">
+        <q-card-section class="text-lime-5">
+          <div class="text-h6 text-bold">{{ userid }}님!</div>
+        </q-card-section>
+        <q-card-section class="q-pt-none text-subtitle2 text-white"> 환영합니다!</q-card-section>
+        <q-card-actions align="right">
+          <q-btn flat label="OK" color="teal-3" @click="goHome" />
+        </q-card-actions>
+      </q-card>
+    </q-dialog>
   </div>
 </template>
 
@@ -55,23 +77,26 @@ export default {
       userid: '',
       userpwd: '',
       token: '',
+      alert: false,
+      alert2: false,
+      msg: '',
     };
   },
   methods: {
     login() {
       let err = true;
-      let msg = '';
+      this.msg = '';
       if (!this.userid) {
         err = false;
-        msg = '아이디를 입력해주세요.';
+        this.msg = '아이디를 입력해주세요.';
         this.$refs.userid.focus();
       } else if (!this.userpwd) {
         err = false;
-        msg = '패스워드를 입력해주세요.';
+        this.msg = '패스워드를 입력해주세요.';
         this.$refs.userpwd.focus();
       }
 
-      if (!err) alert(msg);
+      if (!err) this.alert = true;
       else this.loginUser();
     },
     loginUser() {
@@ -83,13 +108,21 @@ export default {
         .then(({ data }) => {
           console.log(data);
           if (data.userid) {
-            alert('환영합니다!');
             this.$cookie.set('userid', data.userid);
-            this.$router.go(this.$router.currentRoute);
+            this.alert2 = true;
           } else {
-            alert('존재하지 않는 회원입니다.');
+            this.msg = '존재하지 않는 회원입니다.';
+            this.alert = true;
           }
         });
+      // this.$router.push('/');
+    },
+    goList() {
+      this.alert = false;
+      this.$router.go(this.$router.currentRoute);
+    },
+    goHome() {
+      this.alert2 = false;
       this.$router.push('/');
     },
   },
