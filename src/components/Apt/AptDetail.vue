@@ -1,34 +1,35 @@
 <template>
   <div class="q-pa-md">
-    {{ apt }} <br />
-    {{ location }} <br />
     <div v-if="typeof weather.main != 'undefined'">
+      <q-icon name="light_mode" color="amber-4" style="font-size: 2em" />
       <div>
-        <div>{{ weather.name }}</div>
-        <div v-if="weather.sys.country === 'KR'">대한민국</div>
-        <div>{{ dateBuilder() }}</div>
+        <q-chip class="text-overline">{{ weather.name }}</q-chip>
+        <div class="text-overline" v-if="weather.sys.country === 'KR'">대한민국</div>
+        <div class="text-overline">{{ dateBuilder() }}</div>
       </div>
       <div>
-        <div>{{ weather.main.temp }}℃</div>
-        <div v-if="weather.weather[0].main === 'Clouds'">흐림</div>
+        <q-chip
+          icon-right="thermostat"
+          color="deep-orange"
+          text-color="white"
+          class="glossy text-overline text-bold"
+          >{{ weather.main.temp }}℃</q-chip
+        >
+        <q-chip icon-right="mood" color="amber-4" class="glossy text-overline text-bold">{{
+          weather.weather[0].main
+        }}</q-chip>
       </div>
     </div>
-    <hr />
+    <br />
     <div class="map_wrap">
       <div id="map"></div>
-
-      <div class="custom_zoomcontrol radius_border">
-        <span @click="zoomIn"
-          ><img
-            src="https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/ico_plus.png"
-            alt="확대"
-        /></span>
-        <span @click="zoomOut"
-          ><img
-            src="https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/ico_minus.png"
-            alt="축소"
-        /></span>
-      </div>
+      <br />
+      <p>
+        <q-btn round icon="zoom_in" text-color="blue-grey-9" color="lime-5" @click="zoomIn" />
+        &nbsp;
+        <q-btn round icon="zoom_out" text-color="lime-5" color="blue-grey-9" @click="zoomOut" />
+      </p>
+      <br />
       <p>
         <label class="text-caption">
           <q-toggle v-model="value1" color="amber-4" keep-color @input="setOverlayMapTypeId" />
@@ -341,14 +342,18 @@ export default {
 
 <style scoped>
 #map {
-  width: 1200px;
-  height: 1200px;
+  width: 800px;
+  height: 500px;
   margin: 0 auto;
+  border-radius: 10px;
 }
+/*
 .custom_zoomcontrol {
+  
   position: absolute;
   top: 50px;
   right: 10px;
+  
   width: 36px;
   height: 80px;
   overflow: hidden;
@@ -371,6 +376,7 @@ export default {
 .custom_zoomcontrol span:first-child {
   border-bottom: 1px solid #bfbfbf;
 }
+*/
 .map_wrap,
 .map_wrap * {
   margin: 0;
@@ -386,7 +392,7 @@ export default {
 #category {
   position: absolute;
   top: 10px;
-  left: 10px;
+  left: 350px;
   border-radius: 5px;
   border: 1px solid #909090;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.4);

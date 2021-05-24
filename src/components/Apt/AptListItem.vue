@@ -8,22 +8,19 @@
     <td>{{ this.apt.dong }}</td>
     <td>{{ this.apt.aptName }}</td>
     <td>{{ this.apt.buildYear }}</td>
-    <td>
-      {{ this.apt.dealYear }}년 {{ this.apt.dealMonth }}월
-      {{ this.apt.dealDay }}일
-    </td>
+    <td>{{ this.apt.dealYear }}년 {{ this.apt.dealMonth }}월 {{ this.apt.dealDay }}일</td>
     <td>{{ this.apt.area | calc }}평</td>
     <td>{{ this.apt.floor }}층</td>
     <td v-if="apt.dealAmount != null">
-      {{ (this.apt.dealAmount.replace(",", "") * 10000) | price }}원
+      {{ (this.apt.dealAmount.replace(',', '') * 10000) | price }}원
     </td>
     <td v-else>매매 가격 정보가 없습니다.</td>
   </tr>
 </template>
 <script>
-import { mapActions } from "vuex";
+import { mapActions } from 'vuex';
 export default {
-  name: "AptListItem",
+  name: 'AptListItem',
   data() {
     return {
       isColor: false,
@@ -33,7 +30,7 @@ export default {
     apt: Object,
   },
   methods: {
-    ...mapActions(["selectApt"]),
+    ...mapActions(['selectApt']),
     chooseApt() {
       this.selectApt(this.apt);
     },
@@ -47,7 +44,7 @@ export default {
     },
     price(value) {
       if (!value) return value;
-      return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
     },
   },
 };
@@ -55,6 +52,6 @@ export default {
 
 <style>
 .mouse-over-bgcolor {
-  background-color: blanchedalmond;
+  background-color: rgb(255, 247, 223);
 }
 </style>
