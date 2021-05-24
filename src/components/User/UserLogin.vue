@@ -1,26 +1,37 @@
 <template>
   <div>
-    <label for="userid">아이디 : </label>
-    <input
+    <q-card>
+    <br/>
+    <p class="text-h5" for="userid"> 아이디  </p>
+    <q-card-section>
+    <q-input
       ref="userid"
       type="text"
       v-model="userid"
       name="userid"
       id="userid"
       placeholder="아이디 입력"
+      label="아이디 입력해주세요."
     />
     <br />
-    <label for="userpwd">비밀번호 : </label>
-    <input
+    </q-card-section>
+    <p class="text-h5" for="userpwd"> 비밀번호 </p>
+     <q-card-section> 
+    <q-input
       ref="userpwd"
-      type="text"
+      type="password"
       v-model="userpwd"
       name="userpwd"
       id="userpwd"
       placeholder="비밀번호 입력"
+      label="비밀번호 입력해주세요."
     />
+     </q-card-section>
     <br />
-    <button @click="login">로그인</button>
+    
+    </q-card>
+    <br />
+    <q-btn color="lime-5" @click="login">로그인</q-btn>
   </div>
 </template>
 

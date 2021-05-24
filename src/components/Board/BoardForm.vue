@@ -222,8 +222,9 @@ export default {
           .catch(() => {
             this.moveList();
           });*/
-           const formData = new FormData();
-      // formData.append('bnum', this.bnum);
+          const formData = new FormData();
+      formData.append('bnum', this.$route.query.bnum);
+  
       formData.append('title', this.title);
       formData.append('userid', this.$cookie.get('userid'));
       formData.append('price', this.price);
