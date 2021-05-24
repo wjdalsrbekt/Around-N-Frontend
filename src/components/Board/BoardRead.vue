@@ -44,6 +44,7 @@
         <!-- <router-link :to="'/board/delete?bnum=' + board.bnum">삭제</router-link> -->
       </a>
     </div>
+
     <div v-if="image">
       <img :src="image" />
     </div>
@@ -94,7 +95,7 @@ export default {
       bnum: '',
       loginCookie: '',
       content: '',
-      file: '',
+      file: null,
       image: null,
     };
   },
@@ -116,7 +117,7 @@ export default {
     // console.log('들어옴');
     // console.log(this.$route.query.bnum);
     this.$store.dispatch('getBoard', this.$route.query.bnum);
-    this.$store.dispatch('getFile', this.$route.query.bnum);
+    // this.$store.dispatch('getFile', this.$route.query.bnum);
     // this.$store.dispatch('getComments', this.$route.query.bnum);
     http.get(`/comment/${this.$route.query.bnum}`).then(({ data }) => {
       this.comment = data;
@@ -125,14 +126,18 @@ export default {
     this.loginCookie = this.$cookie.get('userid');
     // this.comment = this.$store.state.comments;
     this.content = this.$store.state.board.content;
-    this.file = this.$store.state.file;
-
-    if (this.$store.state.file.saveFolder != null && this.$store.state.file.saveFile != null) {
-      this.image = require('../../../../../work-spring/Final_HappyBack/src/main/webapp/upload/' +
-        this.$store.state.file.saveFolder +
-        '/' +
-        this.$store.state.file.saveFile);
-    }
+    http.get('/board/download/' + this.$route.query.bnum).then(({ data }) => {
+      // console.log('파일');
+      // console.log(data);
+      if (data != '') {
+        this.image = require('../../../../../work-spring/Final_HappyBack/src/main/webapp/upload/' +
+          data.saveFolder +
+          '/' +
+          data.saveFile);
+      }
+      this.file = data;
+    });
+    // console.log(this.file);
   },
   methods: {
     // ...mapActions(['deleteBoard']),
