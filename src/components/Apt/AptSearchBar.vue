@@ -1,6 +1,6 @@
 <template>
   <div class="q-pa-md" style="height: 150px">
-    <div class="q-pa-md">
+    <div style="max-width: 500px; margin: 0 auto">
       <q-select
         outlined
         v-model="model"
