@@ -1,6 +1,14 @@
 <template>
-  <div>
-    <table>
+  <div class="q-pa-md">
+    
+    <q-markup-table flat bordered>
+      <thead class="bg-teal">
+        <tr>
+          <th colspan="2">
+            <div class="text-h3 q-ml-md text-white">글 상세보기</div>
+          </th>
+        </tr>
+      </thead>
       <tr>
         <th>게시글번호</th>
         <td>{{ board.bnum }}</td>
@@ -13,9 +21,19 @@
         <th>내용</th>
         <td>{{ board.content }}</td>
       </tr> -->
-      <q-card flat bordered>
+      <tr>
+        <th colspan="2">
+        <div class="center" v-if="image"><img :src="image" width="1000" /></div>
+        </th>
+      </tr>
+      <tr>
+        <th colspan="2">
+      <!--<q-card flat bordered>
         <q-card-section v-html="content" />
-      </q-card>
+      </q-card>-->
+      <div class="center" v-html="content"></div>
+        </th>
+      </tr>
       <tr>
         <th>작성자</th>
         <td>{{ board.userid }}</td>
@@ -28,7 +46,7 @@
         <th>작성일</th>
         <td>{{ board.regdate }}</td>
       </tr>
-    </table>
+    </q-markup-table>
     <div>
       <a v-if="board.userid === this.loginCookie">
         <router-link :to="'/board/update?bnum=' + board.bnum">수정</router-link>
@@ -45,11 +63,7 @@
       </a>
     </div>
 
-    <div v-if="image">
-      <img :src="image" />
-    </div>
 
-    <hr />
     <!--댓글 시작 -->
     <h3>댓글[{{ comment.length }}]</h3>
     <table>
@@ -97,6 +111,7 @@ export default {
       content: '',
       file: null,
       image: null,
+    
     };
   },
   components: {},
