@@ -1,14 +1,19 @@
 <template>
   <div>
     <div v-if="boards.length">
-      <table>
+    <div>
+      <br />
+      <q-input type="text" placeholder="글 제목 검색어 입력" name="word" id="word" v-model="Sword" />
+    </div>
+    <br/>
+      <q-markup-table flat bordered>
         <colgroup>
           <col :style="{ width: '5%' }" />
           <col :style="{ width: '50%' }" />
           <col :style="{ width: '10%' }" />
           <col :style="{ width: '25%' }" />
         </colgroup>
-        <thead>
+        <thead class="bg-teal-3">
           <tr>
             <th>번호</th>
             <th>제목</th>
@@ -21,11 +26,14 @@
             <board-list-item :board="board" :key="index" v-if="board.title.includes(Sword)" />
           </template>
         </tbody>
-      </table>
+      </q-markup-table>
     </div>
     <div v-else>작성된 글이 없습니다.</div>
     <!--게시글 작성 시작-->
+    <br/>
+    <div class="row justify-end">
     <q-btn icon="edit" color="blue-grey-6" label="작성" @click="movePage" />
+    </div>
     <q-dialog v-model="alert">
       <q-card class="bg-blue-grey-9">
         <q-card-section class="text-lime-5">
@@ -40,10 +48,7 @@
       </q-card>
     </q-dialog>
     <!--게시글 작성 끝-->
-    <div>
-      <br />
-      <input type="text" placeholder="검색어 입력" name="word" id="word" v-model="Sword" />
-    </div>
+    
   </div>
 </template>
 

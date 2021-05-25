@@ -6,7 +6,7 @@
         <option value="id">아이디</option>
         <option value="content">내용</option>
       </select>
-      <input type="text" placeholder="검색어 입력" name="word" id="word" v-model="Sword" />
+      <q-input type="text" placeholder="검색어 입력" name="word" id="word" v-model="Sword" />
       <button @click="searchBtn">검색</button>
     </form>
   </div>
