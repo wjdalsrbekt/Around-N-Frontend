@@ -289,8 +289,8 @@ export default {
           this.timer = setTimeout(() => {
             this.$q.loading.hide();
             this.timer = void 0;
+            this.$router.push('/user/login');
             this.$router.go(this.$router.currentRoute);
-            this.$router.push('/');
           }, 1500);
         }
       }, 3000);
