@@ -53,13 +53,14 @@
 
     <q-btn icon="system_update_alt"
       label="수정"
-      text-color="white"
+      text-color="deep green-5"
       color="lime-5"
       class="text-bold"
       style="height: 55px"  @click="checkValue"/>
     <q-btn icon="logout"
       label="탈퇴"
-      text-color="white"
+      text-color="red-9"
+      text-bold
       color="orange-5"
       class="text-bold"
       style="height: 55px" @click="byeUser"/>
