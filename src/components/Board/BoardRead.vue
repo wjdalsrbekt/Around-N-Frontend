@@ -23,7 +23,7 @@
       </tr> -->
       <tr>
         <th colspan="2">
-        <div class="center" v-if="image"><img :src="image" width="1000" /></div>
+        <div class="center" v-if="image"><img :src="image" width="850" /></div>
         </th>
       </tr>
       <tr>
@@ -65,13 +65,12 @@
 
 
     <!--댓글 시작 -->
-    <h3>댓글[{{ comment.length }}]</h3>
+    <!--<h3>댓글[{{ comment.length }}]</h3>
     <table>
       <tr v-for="(item, index) in comment" :key="`${index}_comment`">
         <td>{{ item.comment_content }}</td>
         <td>{{ item.user_name }}</td>
         <td>{{ item.comment_time | date }}</td>
-        <!-- <button @click="modifyComment">수정</button> -->
         <button @click="deleteComment(item.comment_no, item.user_name)">삭제</button>
       </tr>
     </table>
@@ -88,7 +87,53 @@
       <br />
       <button @click="checkValue">작성</button>
       <br />
-    </div>
+    </div>-->
+    
+    <!--<div class="q-pa-md">
+        <q-table
+      title="댓글"
+      :data="comment"
+      :columns="columns"
+      row-key="name"
+    >
+    <template v-slot:no-data="{ message}">
+        <div class="full-width row flex-center text-accent q-gutter-sm">
+          <q-icon size="2em" name="sentiment_dissatisfied" />
+          <span>
+            Well this is sad... {{ message }}
+          </span>
+        </div>
+      </template>
+      </q-table>
+    </div>-->
+    <div class="q-pa-md">
+    <q-table
+      title="댓글"
+      :data="comment"
+      :columns="columns"
+      :filter="filter"
+      no-data-label="아무것도 적혀있지 않습니다."
+      no-results-label="해당 댓글 내용이 없습니다."
+      row-key="name"
+    >
+      <template v-slot:top-right>
+        <q-input borderless dense debounce="300" v-model="filter" placeholder="Search">
+          <q-icon slot="append" name="search" />
+        </q-input>
+      </template>
+
+      <template v-slot:no-data="{ icon, message, filter }">
+        <div class="full-width row flex-center text-accent q-gutter-sm">
+          <q-icon size="2em" name="sentiment_dissatisfied" />
+          <span>
+            좀만 기다려봐요 .. {{ message }}
+
+          </span>
+          <q-icon size="2em" :name="filter ? 'filter_b_and_w' : icon" />
+        </div>
+      </template>
+    </q-table>
+  </div>
   </div>
 </template>
 <script>
@@ -100,8 +145,10 @@ export default {
   name: 'BoardDetail',
   data() {
     return {
+
+      filter: '',
       // code: '',
-      comment: '',
+      comment: [],
       comment_no: '',
       user_name: '',
       comment_content: '',
@@ -111,9 +158,43 @@ export default {
       content: '',
       file: null,
       image: null,
-    
+     columns: [
+        {
+          name: 'comment_no',
+          required: true,
+          label: '댓글번호',
+          align: 'left',
+          field:'comment_no',
+          sortable: true
+        },
+        {
+          name: 'user_name',
+          required: true,
+          label: '작성한 ID',
+          align: 'left',
+          field:'user_name',
+          sortable: true
+        },
+        {
+          name: 'comment_content',
+          required: true,
+          label: '댓글내용',
+          align: 'left',
+          field:'comment_content',
+          sortable: true
+        },
+        {
+          name: 'comment_time',
+          required: true,
+          label: '댓글시간',
+          align: 'left',
+          field:'comment_time',
+          sortable: true
+        },
+     ]
     };
   },
+
   components: {},
   computed: {
     ...mapState(['board'], ['file'], ['comments']),
