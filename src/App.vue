@@ -12,7 +12,7 @@
           <!--Footer -->
           <hr />
           <p class="text-overline">Copyright @ 2021 정민규 & 노영주</p>
-          <q-page-scroller position="bottom-right">
+          <q-page-scroller position="bottom-right" :scroll-offset="150">
             <q-btn fab icon="keyboard_arrow_up" color="amber-4" />
           </q-page-scroller>
         </q-page-container>
