@@ -50,16 +50,17 @@
     <div>
       <br/>
       <a v-if="board.userid === this.loginCookie">
+        <router-link :to="'/board/update?bnum=' + board.bnum">
         <q-btn
           icon="mode_edit"
           label="수정"
-          text-color="deep green-5"
+          text-color="deep green-3"
           color="lime-5"
           class="text-bold"
           style="height: 55px"
         >
-        <router-link :to="'/board/update?bnum=' + board.bnum"></router-link>
         </q-btn>
+        </router-link>
         &nbsp;
         <!-- <button @click="deleteItem">삭제</button> -->
         <q-btn
@@ -352,4 +353,7 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+a{
+    text-decoration: none;
+}</style>
