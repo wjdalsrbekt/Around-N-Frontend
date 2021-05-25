@@ -26,14 +26,21 @@
         <div class="center" v-if="image"><img :src="image" width="850" /></div>
         </th>
       </tr>
+       <br/>
+        <br/>
+         <br/>
       <tr>
         <th colspan="2">
       <!--<q-card flat bordered>
         <q-card-section v-html="content" />
       </q-card>-->
+    
       <div class="center" v-html="content"></div>
         </th>
       </tr>
+       <br/>
+        <br/>
+         <br/>
       <tr>
         <th>작성자</th>
         <td>{{ board.userid }}</td>
@@ -139,9 +146,9 @@
       </template>
     </q-table>
     <br/>
-    <div class="row">
-      <div class="col-6">
-     <q-input 
+    <div class="q-mt-md">
+      
+     <q-input
         type="text"
         id="comment_content"
         name="comment_content"
@@ -149,10 +156,9 @@
         ref="comment_content"
         placeholder="댓글 내용을 입력하세요."
       />
-      </div>
-      <div class="col-6">
-      <q-btn size="30px" dense color="teal-3" label="댓글 작성" @click="checkValue" no-caps></q-btn>
-      </div>
+   
+    <br/>
+      <q-btn style="height: 55px; width:150px" dense color="teal-3" icon="mode_edit" label="작성" @click="checkValue" no-caps></q-btn>
   </div>
   </div>
   </div>
