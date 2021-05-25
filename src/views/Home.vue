@@ -92,10 +92,10 @@
       <q-carousel-slide :name="4" :img-src="image4" />
     </q-carousel>
     <!--Thumbnails end-->
-    <q-btn color="purple" @click="showLoading" />
+    <!-- <q-btn color="purple" @click="showLoading" /> -->
     <!--ajax bar -->
-    <q-ajax-bar ref="bar" position="bottom" color="lime-5" size="12px" skip-hijack />
-    <q-btn color="purple" label="탈퇴 스피너" @click="trigger" />
+    <!-- <q-ajax-bar ref="bar" position="bottom" color="lime-5" size="12px" skip-hijack /> -->
+    <!-- <q-btn color="purple" label="탈퇴 스피너" @click="trigger" /> -->
   </div>
 </template>
 
