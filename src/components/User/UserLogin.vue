@@ -1,5 +1,6 @@
 <template>
   <div class="q-pa-md">
+    <div style="max-width: 500px;margin:0 auto">
     <q-card>
       <br />
       <p class="text-h5" for="userid">아이디</p>
@@ -66,6 +67,7 @@
         </q-card-actions>
       </q-card>
     </q-dialog>
+    </div>
   </div>
 </template>
 

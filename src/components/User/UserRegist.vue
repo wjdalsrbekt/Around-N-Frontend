@@ -1,5 +1,6 @@
 <template>
-  <div>
+<div class="q-pa-md">
+  <div style="max-width: 500px;margin:0 auto">
     <h1>회원가입</h1>
     <label for="userid">아이디</label>
     <input type="text" id="userid" v-model="userid" ref="userid" />
@@ -23,6 +24,7 @@
     <br />
     <button @click="checkValue">회원가입</button>
   </div>
+</div>
 </template>
 
 <script>
