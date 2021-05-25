@@ -48,14 +48,26 @@
       </tr>
     </q-markup-table>
     <div>
+      <br/>
       <a v-if="board.userid === this.loginCookie">
-        <router-link :to="'/board/update?bnum=' + board.bnum">수정</router-link>
+        <q-btn
+          icon="mode_edit"
+          label="수정"
+          text-color="deep green-5"
+          color="lime-5"
+          class="text-bold"
+          style="height: 55px"
+        >
+        <router-link :to="'/board/update?bnum=' + board.bnum"></router-link>
+        </q-btn>
+        &nbsp;
         <!-- <button @click="deleteItem">삭제</button> -->
         <q-btn
           icon="clear"
           text-color="deep-orange"
           color="amber-4"
           class="text-bold"
+           style="height: 55px"
           @click="showLoading"
           label="삭제"
         />
@@ -89,24 +101,8 @@
       <br />
     </div>-->
     
-    <!--<div class="q-pa-md">
-        <q-table
-      title="댓글"
-      :data="comment"
-      :columns="columns"
-      row-key="name"
-    >
-    <template v-slot:no-data="{ message}">
-        <div class="full-width row flex-center text-accent q-gutter-sm">
-          <q-icon size="2em" name="sentiment_dissatisfied" />
-          <span>
-            Well this is sad... {{ message }}
-          </span>
-        </div>
-      </template>
-      </q-table>
-    </div>-->
     <div class="q-pa-md">
+    
     <q-table
       title="댓글"
       :data="comment"
@@ -115,24 +111,48 @@
       no-data-label="아무것도 적혀있지 않습니다."
       no-results-label="해당 댓글 내용이 없습니다."
       row-key="name"
+      dense
     >
+
+  
       <template v-slot:top-right>
         <q-input borderless dense debounce="300" v-model="filter" placeholder="Search">
           <q-icon slot="append" name="search" />
         </q-input>
       </template>
+      <template v-slot:body-cell-actions="props">
+            <q-td :props="props">
+              <q-btn dense round flat color="grey" @click="deleteComment(props.row.comment_no, props.row.user_name)" icon="delete"></q-btn>
+            </q-td>          
+          </template>
 
       <template v-slot:no-data="{ icon, message, filter }">
         <div class="full-width row flex-center text-accent q-gutter-sm">
           <q-icon size="2em" name="sentiment_dissatisfied" />
           <span>
-            좀만 기다려봐요 .. {{ message }}
+            저런! 비어있네요 .. {{ message }}
 
           </span>
           <q-icon size="2em" :name="filter ? 'filter_b_and_w' : icon" />
         </div>
       </template>
     </q-table>
+    <br/>
+    <div class="row">
+      <div class="col-6">
+     <q-input 
+        type="text"
+        id="comment_content"
+        name="comment_content"
+        v-model="comment_content"
+        ref="comment_content"
+        placeholder="댓글 내용을 입력하세요."
+      />
+      </div>
+      <div class="col-6">
+      <q-btn size="30px" dense color="teal-3" label="댓글 작성" @click="checkValue" no-caps></q-btn>
+      </div>
+  </div>
   </div>
   </div>
 </template>
@@ -191,6 +211,12 @@ export default {
           field:'comment_time',
           sortable: true
         },
+        {
+          name:'actions',
+          label:'Actions',
+          field:'',
+          align:'center'
+        }
      ]
     };
   },
@@ -245,6 +271,7 @@ export default {
     // moveList() {
     //   this.$router.push('/board');
     // },
+    
     checkValue() {
       if (this.loginCookie) {
         let err = true;
@@ -289,7 +316,11 @@ export default {
         });
     },
     deleteComment(cnum, writer) {
+      
       if (writer != this.$cookie.get('userid')) {
+        console.log( this.$cookie.get('userid'));
+        console.log(writer);
+        console.log(cnum);
         alert('본인만 삭제를 할 수 있습니다.');
       } else {
         http.delete('/comment/' + cnum).then(({ data }) => {
