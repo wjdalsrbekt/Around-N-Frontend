@@ -67,9 +67,12 @@ export default new Vuex.Store({
   },
   actions: {
     getWeather({ commit }, query) {
-      const api_key = 'd90fae9b96bf333ee127505adf090614';
       const url_base = 'https://api.openweathermap.org/data/2.5/';
-      let fetchUrl = url_base + 'weather?q=' + query + '&units=metric&lang=kr&APPID=' + api_key;
+      let fetchUrl =
+        url_base +
+        'weather?q=' +
+        query +
+        `&units=metric&lang=kr&APPID=${process.env.VUE_APP_OPENWEAHTER_API_KEY}`;
 
       fetch(fetchUrl)
         .then((res) => {
