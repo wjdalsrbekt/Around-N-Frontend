@@ -17,19 +17,45 @@
 다양한  N세권에 포함되는지 바로 확인가능하답니다.
 
 
-## 주요기능
+## 🎞주요기능
 <a href ="https://www.youtube.com/watch?v=usJ1UsJBG_M">서비스 소개 영상</a>
 
+## 😁팀
+---
 
-프로젝트에 관하여
+#####🙆‍♂️정민규 (팀장)
+-BackEnd : SpringBoot REST Server 구상 및 구축
+-DataBase : SCHEMA, TABLE, VIEW 구조 
+-FrontEnd : 게시판, 회원 관련 스타일링
+            오픈웨더 API 구현 (날씨 정보)
+            
+#####🙆‍♀️노영주 (팀원)
+-FrontEnd : Vue/Vuex/Quasar 구상 및 구축
+            (매물, 게시글, 댓글, 로그인, 로그아웃)
+            매물, 메인페이지, 이벤트 스타일링
+            KAKAO Map API 구현 (마커연결 및 디자인)
+-BackEnd : 회원 관련 기능 추가
+
+
+##💙프로젝트에 관하여
+---
 삼성청년 소프트웨어 아카데미 5기 1학기 최종프로젝트 12조
 
-화면 설계
-메인
+
+##프로젝트 구조
+---
+![image](/uploads/0ebab3aaf7642ea80220f928698e39ad/image.png)
+
+➢ 헤더를 통해 각각의 페이지에 접근이 가능합니다.
+➢ 회원이 로그인 상태이면 회원수정이, 로그인 되어있지 않은 상태면 회원가입 탭이 나타납니다.
+
+## 화면 설계
+---
+
 ![image](/uploads/a3a2b27c42632a4df3546dadf36ea9c0/image.png)
-1. 홈 아이콘을 클릭 시 메인 vue로 이동합니다.
-2. 게시판 탭을 클릭 시 게시판 vue로 이동합니다.
-3. 로그인 탭을 클릭 시 로그인 vue로 이동합니다. 
+- 1. 홈 아이콘을 클릭 시 메인 vue로 이동합니다.
+- 2. 게시판 탭을 클릭 시 게시판 vue로 이동합니다.
+    3. 로그인 탭을 클릭 시 로그인 vue로 이동합니다. 
 	3-1. 로그인 상태일 경우 로그아웃 탭으로 변환됩니다.
 4. 회원가입 탭을 클릭 시 회원가입 vue로 이동합니다.
 	4-1. 로그인 상태일 경우 회원정보 탭으로 변환됩니다.
@@ -135,57 +161,35 @@
 ![image](/uploads/11dc7274cab4d5d8c37c203eb032f9d6/image.png)
 1. 지도에서 해당 마커의 길찾기를 클릭하면 새 창으로 길찾기가 가능합니다.
 
-팀
-정민규 (팀장)
--BackEnd : SpringBoot REST Server 구상 및 구축
--DataBase : SCHEMA, TABLE, VIEW 구조 
--FrontEnd : 게시판, 회원 관련 스타일링
-            오픈웨더 API 구현 (날씨 정보)
-            
-노영주 (팀원)
--FrontEnd : Vue/Vuex/Quasar 구상 및 구축
-            (매물, 게시글, 댓글, 로그인, 로그아웃)
-            매물, 메인페이지, 이벤트 스타일링
-            KAKAO Map API 구현 (마커연결 및 디자인)
--BackEnd : 회원 관련 기능 추가
+
 
 프로젝트 일정
 ![image](/uploads/f0ce58e598679a3f7db190eefe4a91a1/image.png)
 
-프로젝트 구조
-![image](/uploads/0ebab3aaf7642ea80220f928698e39ad/image.png)
 
-▶ 헤더를 통해 각각의 페이지에 접근이 가능합니다.
-▶ 회원이 로그인 상태이면 회원수정이, 로그인 되어있지 않은 상태면 회원가입 탭이 나타납니다.
-
-프로젝트 아키텍쳐
+##프로젝트 아키텍쳐
+---
 ![image](/uploads/69eba336b9bd88f66e21f0d9f73b598d/image.png)
 
-개발 패턴
+## 개발 패턴
+---
+#### 폭포수 모델
 ![image](/uploads/ef6b1afff311db2d0a24a5ec500b4a12/image.png)
 
 ## ✅ToDoList
+---
  - <a href="https://www.notion.so/ToDoList-365d57b9da7f4cd2a4f8ece3515297f0 ">5월 19일</a>
-
-5월 20일
-https://www.notion.so/ToDoList-770706e9e78d4d81a53a24139725d956
-5월 21일
-https://www.notion.so/ToDoList-58c483ef691449b8acb6c79000db2fa0
-5월 22일
-https://www.notion.so/ToDoList-d485b3cdfe2c4d6aa5af8d9a7ca5e140
-5월 23일
-https://www.notion.so/ToDoList-147f1c111fbc42cc9e4d56a7deca34c8
-5월 24일
-https://www.notion.so/ToDoList-69a7b994c9224e8fa03932e6dd3ab442
-5월 25일
-https://www.notion.so/ToDoList-fb2d325a715d4590b24b2cd9fb67bd8d
-5월 26일
-https://www.notion.so/ToDoList-e3fb12d746314a1ba20991228e5737dc
-5월 27일
-https://www.notion.so/ToDoList-911390391c0a4039b0d32e2df48dea96
+ - <a href="https://www.notion.so/ToDoList-770706e9e78d4d81a53a24139725d956">5월 20일</a>
+ - <a href="https://www.notion.so/ToDoList-58c483ef691449b8acb6c79000db2fa0">5월 21일</a>
+ - <a href="https://www.notion.so/ToDoList-d485b3cdfe2c4d6aa5af8d9a7ca5e140">5월 22일</a>
+ - <a href="https://www.notion.so/ToDoList-147f1c111fbc42cc9e4d56a7deca34c8">5월 23일</a>
+ - <a href="https://www.notion.so/ToDoList-147f1c111fbc42cc9e4d56a7deca34c8">5월 24일</a>
+ - <a href="https://www.notion.so/ToDoList-fb2d325a715d4590b24b2cd9fb67bd8d">5월 25일</a>
+ - <a href="https://www.notion.so/ToDoList-e3fb12d746314a1ba20991228e5737dc">5월 26일</a>
+ - <a href="https://www.notion.so/ToDoList-911390391c0a4039b0d32e2df48dea96">5월 27일</a>
 
 ## ✏프로젝트 후기
-
+---
 ##### 노영주
  - 한학기 동안 배운 것들을 정리할 수 있는 시간이였습니다.
 새로운 것들도 배웠고, 좋은 팀원분과 함께 개발하며 즐거웠습니다.
@@ -202,6 +206,7 @@ https://www.notion.so/ToDoList-911390391c0a4039b0d32e2df48dea96
 원활히 프로젝트가 동작할땐 정말 짜릿하였습니다.
 
 ### 라이센스
+---
  > This is released under the MIT license. See LICENSE for details.
 
 ## Project setup
