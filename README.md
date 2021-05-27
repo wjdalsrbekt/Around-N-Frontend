@@ -1,6 +1,8 @@
 ![image](/uploads/a8d787985695429c6113575d477fa0d9/image.png)
 
 # Around : N
+
+<a href ="https://www.youtube.com/watch?v=usJ1UsJBG_M">서비스 소개 영상</a>
 - Around:N 은 사용자끼리의 커뮤니티들 형성하여 
 소비자의 합리적인 선택을 적극 권장 합니다.
 활발한 의견공유를 통해 나만의 SWEET HOME을 만나보세요!
@@ -16,20 +18,16 @@
 - Around:N은 사용자가 선택한 매물이 주변의 약국, 편의점, 문화공간 등 
 다양한  N세권에 포함되는지 바로 확인가능하답니다.
 
-
-## 🎞주요기능
-<a href ="https://www.youtube.com/watch?v=usJ1UsJBG_M">서비스 소개 영상</a>
-
 ## 😁팀
 ---
 
-#####🙆‍♂️정민규 (팀장)
+##### ️정민규 (팀장)
 -BackEnd : SpringBoot REST Server 구상 및 구축
 -DataBase : SCHEMA, TABLE, VIEW 구조 
 -FrontEnd : 게시판, 회원 관련 스타일링
             오픈웨더 API 구현 (날씨 정보)
             
-#####🙆‍♀️노영주 (팀원)
+##### ️노영주 (팀원)
 -FrontEnd : Vue/Vuex/Quasar 구상 및 구축
             (매물, 게시글, 댓글, 로그인, 로그아웃)
             매물, 메인페이지, 이벤트 스타일링
@@ -48,9 +46,10 @@
 
 ➢ 헤더를 통해 각각의 페이지에 접근이 가능합니다.
 ➢ 회원이 로그인 상태이면 회원수정이, 로그인 되어있지 않은 상태면 회원가입 탭이 나타납니다.
-
-## 화면 설계
+## 🎞주요기능
 ---
+### 화면 설계
+
 
 ![image](/uploads/a3a2b27c42632a4df3546dadf36ea9c0/image.png)
 - 1. 홈 아이콘을 클릭 시 메인 vue로 이동합니다.
