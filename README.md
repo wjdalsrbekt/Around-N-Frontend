@@ -262,25 +262,19 @@
 ---
  > This is released under the MIT license. See LICENSE for details.
 
-## Project setup
+## 프로젝트 설치 후,
 ```
 npm install
 ```
 
-### Compiles and hot-reloads for development
+### 컴파일
 ```
 npm run serve
 ```
 
-### Compiles and minifies for production
+### 빌드 
 ```
 npm run build
 ```
 
-### Lints and fixes files
-```
-npm run lint
-```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
