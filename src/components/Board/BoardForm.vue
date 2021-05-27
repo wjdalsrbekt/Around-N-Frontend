@@ -128,7 +128,7 @@
       <q-dialog v-model="alert2">
         <q-card class="bg-blue-grey-9">
           <q-card-section class="text-lime-5">
-            <div class="text-h6 text-bold">경고</div>
+            <div class="text-h6 text-bold">알림</div>
           </q-card-section>
           <q-card-section class="q-pt-none text-subtitle2 text-white"> {{ msg }}</q-card-section>
           <q-card-actions align="right">
