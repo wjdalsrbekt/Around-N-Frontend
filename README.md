@@ -17,11 +17,10 @@
 다양한  N세권에 포함되는지 바로 확인가능하답니다.
 
 
-주요기능
+## 주요기능
 <a href ="https://www.youtube.com/watch?v=usJ1UsJBG_M">서비스 소개 영상</a>
 
-라이센스
-This is released under the MIT license. See LICENSE for details.
+
 프로젝트에 관하여
 삼성청년 소프트웨어 아카데미 5기 1학기 최종프로젝트 12조
 
@@ -185,22 +184,25 @@ https://www.notion.so/ToDoList-e3fb12d746314a1ba20991228e5737dc
 5월 27일
 https://www.notion.so/ToDoList-911390391c0a4039b0d32e2df48dea96
 
-프로젝트 후기
+## 프로젝트 후기
 
-노영주
-한학기 동안 배운 것들을 정리할 수 있는 시간이였습니다.
+#####노영주
+ - 한학기 동안 배운 것들을 정리할 수 있는 시간이였습니다.
 새로운 것들도 배웠고, 좋은 팀원분과 함께 개발하며 즐거웠습니다.
 프로젝트를 하며 느꼈던 부족한 점들을
 보완하여 다음에는 더 발전한 프로젝트를 진행하고 싶습니다.
 
-정민규
- 비대면 협업을 통하여 프로젝트를 완성 시켜야 하다보니 
+#####정민규
+ - 비대면 협업을 통하여 프로젝트를 완성 시켜야 하다보니 
 걱정이 많았습니다. 하지만 git을 통한 코드 관리와 웹엑스, 구글meet으로 의견을 충분히 주고받은 후, 노션을 통하여 to-do-list를 적어 
 당일 목표를 정해놓고 프로젝트를 진행하니 
 오히려 장소에대한 제약이 있지않아 더욱 좋았습니다. 
 또한, 1학기 때 배운 Backend와 Frontend 기술스택 을 이용하고, 
 새로운 Framework인 퀘이사를 공부, 적용시켜 
 원활히 프로젝트가 동작할땐 정말 짜릿하였습니다.
+
+### 라이센스
+ > This is released under the MIT license. See LICENSE for details.
 
 ## Project setup
 ```
