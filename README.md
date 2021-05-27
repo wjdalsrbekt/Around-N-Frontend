@@ -1,6 +1,7 @@
 ![image](/uploads/a8d787985695429c6113575d477fa0d9/image.png)
 
 커뮤니티 형성
+
 Around:N 은 사용자끼리의 커뮤니티들 형성하여 소비자의 합리적인 선택을 적극 권장 합니다.
 활발한 의견공유를 통해 나만의 SWEET HOME을 만나보세요!
 기분좋게 매물 보러 가볼까요?
@@ -11,6 +12,8 @@ Around:N 은 사용자끼리의 커뮤니티들 형성하여 소비자의 합리
 Around:N은 사용자가 선택한 매물이 주변의 약국, 편의점, 문화공간 등 다양한  N세권에 포함되는지 바로 확인가능하답니다.
 
 주요기능
+<a href ="https://www.youtube.com/watch?v=usJ1UsJBG_M">서비스 소개 영상</a>
+
 라이센스
 This is released under the MIT license. See LICENSE for details.
 프로젝트에 관하여
