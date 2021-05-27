@@ -74,7 +74,8 @@
 - 7. 클릭 시 현재 페이지 top으로 이동합니다.
 
 ##### 회원가입
-![image](/uploads/f60ce2d17a81b0b47f2c10b749fdc780/image.png)
+![image](https://user-images.githubusercontent.com/47201943/119828029-c046c480-bf34-11eb-9057-6f6b8005bec8.png)
+
 - 1. 검사를 한 아이디만 가입이 가능합니다. 
     - 1-1. 검사 클릭시 DB상에 존재하지 않는 아이디만 flag값을 true로 바꿔줍니다. 
     - 1-2. watch를 사용하여 아이디값이 변경되면 false로 값이 변경되어 다시 검사를 수행해야 합니다.
@@ -88,7 +89,8 @@
     - 4-1. 입력하지 않을 시 rule로 경고를 줍니다. 
     - 4-2. ref를 주어 입력하지 않고 진행 시 해당 input으로 이동합니다.
 
-![image](/uploads/886eebc0965f66fc7e6b8b256b2f4a07/image.png)
+![image](https://user-images.githubusercontent.com/47201943/119828041-c341b500-bf34-11eb-805f-f4655aa30c46.png)
+
 - 5. 주소를 입력합니다. 필수입력사항입니다. 
     - 5-1. 입력하지 않을 시 rule로 경고를 줍니다. 
     - 5-2. ref를 주어 입력하지 않고 진행 시 해당 input으로 이동합니다.
@@ -100,7 +102,7 @@
     - 7-2. 모두 만족하고, 아이디 검사까지 진행했다면 가입성공 alert를 호출합니다.
 
 ##### 로그인
-![image](/uploads/659ce3574e9fcaaaf78e101c0cb10394/image.png)
+![image](https://user-images.githubusercontent.com/47201943/119828066-c76dd280-bf34-11eb-8d19-6bea54c9a18c.png)
 - 1. 아이디를 입력합니다. 필수입력사항입니다. 
     - 1-1. 입력하지 않을 시 rule로 경고를 줍니다. 
     - 1-2. ref를 주어 입력하지 않고 진행 시 해당 input으로 이동합니다.
@@ -111,29 +113,31 @@
     - 3-1. 모두 일치했다면 성공alert를, 일치하는 정보가 DB에 없다면 실패alert를 호출합니다.
 
 ##### 로그아웃
-![image](/uploads/354ef4fc8d396bec68a0a5626ec31d5c/image.png)
+![image](https://user-images.githubusercontent.com/47201943/119828081-cb015980-bf34-11eb-80d8-3bcf6158d456.png)
 - 1. 로그인 상태에서 로그아웃을 클릭할 경우 로그아웃이 수행됩니다.
 
 ##### 게시판
-![image](/uploads/b36fa5ac6c22dbad8702ad98808f1b31/image.png)
+![image](https://user-images.githubusercontent.com/47201943/119828204-e8362800-bf34-11eb-9c5f-575280f44c75.png)
+
 - 1. 글 제목을 입력할때마다 includes를 사용하여 해당 단어를 포함한 게시글 리스트만을 보여줍니다.
 
-![image](/uploads/c347c52af421ca3e1c99303959ce7124/image.png)
+![image](https://user-images.githubusercontent.com/47201943/119828215-ea988200-bf34-11eb-9fdf-9234898ae419.png)
+
 - 2. 게시판 리스트에서 제목을 클릭하면 해당 글 상세보기로 이동합니다.
 - 3. 게시글을 작성합니다. 로그인 상태에서만 가능합니다. 
     - 3-1. 로그인 상태가 아니라면 alert를 호출합니다.
 
-![image](/uploads/ac9a616fe70e08ac703d4339e69a53ca/image.png)
+![image](https://user-images.githubusercontent.com/47201943/119828226-ecfadc00-bf34-11eb-8e70-8dfc990bba39.png)
 - 4. 글 상세보기입니다. 
     - 4-1.로그인 상태가 아니고, 해당 글의 작성자가 아니라면 수정, 삭제 버튼이 나타나지 않습니다.
-![image](/uploads/0d545793b81772667192fbfbe099a930/image.png)
+![image](https://user-images.githubusercontent.com/47201943/119828243-f126f980-bf34-11eb-9024-7602af6baa95.png)
 - 5. 로그인 상태이고, 해당글의 작성자라면 수정, 삭제 버튼이 나타납니다.
     - 5-1. 수정버튼 클릭 시 수정 vue로 이동합니다.
     - 5-2. 삭제버튼 클릭 시 2초 간의 loading 후 삭제 성공 alert가 호출됩니다.
 
 ##### 게시판 작성
-![image](/uploads/4d179ad0db70667485260aef6084c149/image.png)
-![image](/uploads/a1ad807f389bc4471fef4a83ee1a47aa/image.png)
+![image](https://user-images.githubusercontent.com/47201943/119828305-01d76f80-bf35-11eb-85a7-99653031fd76.png)
+![image](https://user-images.githubusercontent.com/47201943/119828314-03a13300-bf35-11eb-8162-711fa565645b.png)
 
 - 1. 제목을 입력합니다. 필수입력사항입니다. 
     - 1-1. 입력하지 않을 시 rule로 경고를 줍니다. 
@@ -147,13 +151,15 @@
 - 5. 등록 혹은 취소를 진행합니다.
 
 ##### 수정화면 
-![image](/uploads/8338da6fadebe2005c2f3d2124ba05be/image.png)
+
+![image](https://user-images.githubusercontent.com/47201943/119828328-06038d00-bf35-11eb-868a-e605e248a0ed.png)
 
 * 해당 글의 정보를 불러오게 하였습니다.
 - 1. 추가된 사진이 없다면 추가할 수 있고, 있다면 갱신할 수 있습니다.
 - 2. 수정된 게시물을 수정 혹은 취소합니다.
 
-![image](/uploads/aa146fdc1cc0766b9e2a73da9b740774/image.png)
+![image](https://user-images.githubusercontent.com/47201943/119828337-0865e700-bf35-11eb-9d2e-633adc2a46cc.png)
+
 
 * 해당 글에 댓글이 달렸을 경우 댓글 리스트가 나타납니다.
 - 1. 댓글내용을 검색가능합니다.
@@ -162,8 +168,7 @@
 - 4. 댓글을 입력합니다. 로그인된 상태에서만 작성이 가능합니다.
 
 ##### 회원정보 수정
-![image](/uploads/1467cfffd61ac6d27e2b25893dc50216/image.png)
-
+![image](https://user-images.githubusercontent.com/47201943/119828433-203d6b00-bf35-11eb-9116-3bac4199b183.png)
 - 1. 아이디는 수정할 수 없습니다.
 - 2. 이름을 수정합니다. 필수입력사항입니다. 
 - 2-2. 입력하지 않을 시 rule로 경고를 줍니다. 
@@ -178,18 +183,18 @@
     - 5-1. 입력하지 않을 시 rule로 경고를 줍니다. 
     - 5-2. ref를 주어 입력하지 않고 진행 시 해당 input으로 이동합니다.
 
-![image](/uploads/7ace51d5e49c09dcd8b3c1dd07805a8e/image.png)
+![image](https://user-images.githubusercontent.com/47201943/119828448-23385b80-bf35-11eb-8bec-bf4ad66c62fe.png)
 - 1. 수정을 진행합니다.
 - 2. 회원탈퇴를 진행합니다. 
     - 2-1. confirm창으로 ‘네’를 선택 시 탈퇴가 진행됩니다. 
     - 2-2. ajax bar와 loading을 사용하여 3.5초 로딩시간을 주었습니다.
     - 2-3. DB에서 해당 유저 삭제가 진행됩니다.
 
-![image](/uploads/f236a0af02d4e1470dde1a49a1fa25e1/image.png)
-![image](/uploads/1ff58545c819e84a5c6e65be5635310b/image.png)
+![image](https://user-images.githubusercontent.com/47201943/119828473-27fd0f80-bf35-11eb-8398-73e4aa909448.png)
+![image](https://user-images.githubusercontent.com/47201943/119828487-2a5f6980-bf35-11eb-8414-e128913027d7.png)
 
 ##### 매물
-![image](/uploads/483ce658a12cfb2c0bd5d3a9e3f321e6/image.png)
+![image](https://user-images.githubusercontent.com/47201943/119828540-39deb280-bf35-11eb-80d6-d79a66c7ee72.png)
 - 1. 동 혹은 아파트 이름을 select합니다. 
     - 1-1.필수입력사항입니다.
 - 2. 검색할 키워드를 입력합니다. 
@@ -197,24 +202,27 @@
     - 2-2. keypress이벤트를 주어 엔터입력시 바로 검색이 진행됩니다.
 - 3. 검색합니다. 매물리스트 컴포넌트에 리스트가 나타나게됩니다.
 
-![image](/uploads/1e9a74b157aa499f2edfefb11e2e5b16/image.png)
-![image](/uploads/42630321294845eda556bce65084d2b6/image.png)
+![image](https://user-images.githubusercontent.com/47201943/119828547-3c410c80-bf35-11eb-87c8-7519bf1f5ea0.png)
+
+![image](https://user-images.githubusercontent.com/47201943/119828555-3ea36680-bf35-11eb-81bd-54a29b1df531.png)
 - 1. 매물리스트에서 list item을 선택 시 지도에 마커가 표시됩니다.
 
-![image](/uploads/9d764496bfa1d279086244770fd243ff/image.png)
+![image](https://user-images.githubusercontent.com/47201943/119828579-43681a80-bf35-11eb-9f13-a0597db33130.png)
 - 1. 해당 버튼을 클릭하면 서치바, 리스트 컴포넌트 drawer가 접어지게 됩니다. 
     - 1-1. 다시 클릭하면 나타납니다.
 
-![image](/uploads/209092f619985fda7c1f48a49689464d/image.png)
+
+![image](https://user-images.githubusercontent.com/47201943/119828593-45ca7480-bf35-11eb-9ffd-e9c0babc11d0.png)
 - 1. 각 마커를 클릭 시 지도의 사용자 바운더리 안에 존재하는 해당 편의시설을 마커로 표시해줍니다. 
     - 1-1. 바운더리를 이동 시 카카오 맵 API를 이용하여 바로 정보를 실시간으로 받아옵니다. 
     - 1-2. 은행, 마트, 약국, 주유소, 카페, 편의점, 음식점, 지하철역, 문화시설 총 9가지의 편의시설 마커를 제공합니다.
 
-![image](/uploads/c9dd25958c9aa1d2301cf21ad063d259/image.png)
+![image](https://user-images.githubusercontent.com/47201943/119828603-49f69200-bf35-11eb-8399-65120adf2668.png)
+
 - 1. 지도는 확대,축소기능과 교통정보, 자전거도로 정보를 제공합니다. 
     - 1-1. 교통정보와 자전거 도로 두가지 선택도 가능합니다.
 
-![image](/uploads/11dc7274cab4d5d8c37c203eb032f9d6/image.png)
+![image](https://user-images.githubusercontent.com/47201943/119828615-4cf18280-bf35-11eb-86ba-b53486fdeca8.png)
 - 1. 지도에서 해당 마커의 길찾기를 클릭하면 새 창으로 길찾기가 가능합니다.
 
 
