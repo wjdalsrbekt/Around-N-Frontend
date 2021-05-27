@@ -19,7 +19,7 @@
 다양한  N세권에 포함되는지 바로 확인가능하답니다.
 
 ##### Backend 보기!
-<a href="https://lab.ssafy.com/at8in/finalhappyback">Backend 깃허브 바로가기</a>
+<a href="https://github.com/wjdalsrbekt/Around-N-Backend">Backend 깃허브 바로가기</a>
 
 ## 😁팀
 ---
