@@ -215,12 +215,12 @@
 
 
 
-##프로젝트 일정
+## 프로젝트 일정
 ---
 ![image](/uploads/f0ce58e598679a3f7db190eefe4a91a1/image.png)
 
 
-##프로젝트 아키텍쳐
+## 프로젝트 아키텍쳐
 ---
 ![image](/uploads/69eba336b9bd88f66e21f0d9f73b598d/image.png)
 
