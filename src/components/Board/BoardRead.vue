@@ -1,6 +1,5 @@
 <template>
   <div class="q-pa-md">
-    
     <q-markup-table flat bordered>
       <thead class="bg-teal">
         <tr>
@@ -23,24 +22,24 @@
       </tr> -->
       <tr>
         <th colspan="2">
-        <div class="center" v-if="image"><img :src="image" width="850" /></div>
+          <div class="center" v-if="image"><img :src="image" width="850" /></div>
         </th>
       </tr>
-       <br/>
-        <br/>
-         <br/>
+      <br />
+      <br />
+      <br />
       <tr>
         <th colspan="2">
-      <!--<q-card flat bordered>
+          <!--<q-card flat bordered>
         <q-card-section v-html="content" />
       </q-card>-->
-    
-      <div class="center" v-html="content"></div>
+
+          <div class="center" v-html="board.content"></div>
         </th>
       </tr>
-       <br/>
-        <br/>
-         <br/>
+      <br />
+      <br />
+      <br />
       <tr>
         <th>작성자</th>
         <td>{{ board.userid }}</td>
@@ -55,18 +54,18 @@
       </tr>
     </q-markup-table>
     <div>
-      <br/>
+      <br />
       <a v-if="board.userid === this.loginCookie">
         <router-link :to="'/board/update?bnum=' + board.bnum">
-        <q-btn
-          icon="mode_edit"
-          label="수정"
-          text-color="deep green-3"
-          color="lime-5"
-          class="text-bold"
-          style="height: 55px"
-        >
-        </q-btn>
+          <q-btn
+            icon="mode_edit"
+            label="수정"
+            text-color="deep green-3"
+            color="lime-5"
+            class="text-bold"
+            style="height: 55px"
+          >
+          </q-btn>
         </router-link>
         &nbsp;
         <!-- <button @click="deleteItem">삭제</button> -->
@@ -75,14 +74,13 @@
           text-color="deep-orange"
           color="amber-4"
           class="text-bold"
-           style="height: 55px"
+          style="height: 55px"
           @click="showLoading"
           label="삭제"
         />
         <!-- <router-link :to="'/board/delete?bnum=' + board.bnum">삭제</router-link> -->
       </a>
     </div>
-
 
     <!--댓글 시작 -->
     <!--<h3>댓글[{{ comment.length }}]</h3>
@@ -108,59 +106,95 @@
       <button @click="checkValue">작성</button>
       <br />
     </div>-->
-    
+
     <div class="q-pa-md">
-    
-    <q-table
-      title="댓글"
-      :data="comment"
-      :columns="columns"
-      :filter="filter"
-      no-data-label="아무것도 적혀있지 않습니다."
-      no-results-label="해당 댓글 내용이 없습니다."
-      row-key="name"
-      dense
-    >
+      <q-table
+        title="댓글"
+        :data="comment"
+        :columns="columns"
+        :filter="filter"
+        no-data-label="아무것도 적혀있지 않습니다."
+        no-results-label="해당 댓글 내용이 없습니다."
+        row-key="name"
+        dense
+      >
+        <template v-slot:top-right>
+          <q-input borderless dense debounce="300" v-model="filter" placeholder="Search">
+            <q-icon slot="append" name="search" />
+          </q-input>
+        </template>
+        <template v-slot:body-cell-actions="props">
+          <q-td :props="props">
+            <q-btn
+              dense
+              round
+              flat
+              color="grey"
+              @click="deleteComment(props.row.comment_no, props.row.user_name)"
+              icon="delete"
+            ></q-btn>
+          </q-td>
+        </template>
 
-  
-      <template v-slot:top-right>
-        <q-input borderless dense debounce="300" v-model="filter" placeholder="Search">
-          <q-icon slot="append" name="search" />
-        </q-input>
-      </template>
-      <template v-slot:body-cell-actions="props">
-            <q-td :props="props">
-              <q-btn dense round flat color="grey" @click="deleteComment(props.row.comment_no, props.row.user_name)" icon="delete"></q-btn>
-            </q-td>          
-          </template>
+        <template v-slot:no-data="{ icon, message, filter }">
+          <div class="full-width row flex-center text-accent q-gutter-sm">
+            <q-icon size="2em" name="sentiment_dissatisfied" />
+            <span> 저런! 비어있네요 .. {{ message }} </span>
+            <q-icon size="2em" :name="filter ? 'filter_b_and_w' : icon" />
+          </div>
+        </template>
+      </q-table>
+      <br />
+      <div class="q-mt-md">
+        <q-input
+          type="text"
+          id="comment_content"
+          name="comment_content"
+          v-model="comment_content"
+          ref="comment_content"
+          placeholder="댓글 내용을 입력하세요."
+        />
 
-      <template v-slot:no-data="{ icon, message, filter }">
-        <div class="full-width row flex-center text-accent q-gutter-sm">
-          <q-icon size="2em" name="sentiment_dissatisfied" />
-          <span>
-            저런! 비어있네요 .. {{ message }}
+        <br />
+        <q-btn
+          style="height: 55px; width: 150px"
+          dense
+          color="teal-3"
+          icon="mode_edit"
+          label="작성"
+          @click="checkValue"
+          no-caps
+        ></q-btn>
+      </div>
+    </div>
 
-          </span>
-          <q-icon size="2em" :name="filter ? 'filter_b_and_w' : icon" />
-        </div>
-      </template>
-    </q-table>
-    <br/>
-    <div class="q-mt-md">
-      
-     <q-input
-        type="text"
-        id="comment_content"
-        name="comment_content"
-        v-model="comment_content"
-        ref="comment_content"
-        placeholder="댓글 내용을 입력하세요."
-      />
-   
-    <br/>
-      <q-btn style="height: 55px; width:150px" dense color="teal-3" icon="mode_edit" label="작성" @click="checkValue" no-caps></q-btn>
-  </div>
-  </div>
+    <div class="q-pa-md">
+      <q-dialog v-model="alert">
+        <q-card class="bg-blue-grey-9">
+          <q-card-section class="text-lime-5">
+            <div class="text-h6 text-bold">알림</div>
+          </q-card-section>
+          <q-card-section class="q-pt-none text-subtitle2 text-white"> {{ msg }}</q-card-section>
+          <q-card-actions align="right">
+            <q-btn flat label="OK" color="teal-3" v-close-popup />
+          </q-card-actions>
+        </q-card>
+      </q-dialog>
+    </div>
+
+    <div class="q-pa-md">
+      <q-dialog v-model="alert2">
+        <q-card class="bg-blue-grey-9">
+          <q-card-section class="text-lime-5">
+            <div class="text-h6 text-bold">알림</div>
+          </q-card-section>
+          <q-card-section class="q-pt-none text-subtitle2 text-white"> {{ msg }}</q-card-section>
+          <q-card-actions align="right">
+            <q-btn flat label="OK" color="teal-3" @click="moveList" />
+          </q-card-actions>
+        </q-card>
+      </q-dialog>
+    </div>
   </div>
 </template>
 <script>
@@ -172,7 +206,6 @@ export default {
   name: 'BoardDetail',
   data() {
     return {
-
       filter: '',
       // code: '',
       comment: [],
@@ -185,46 +218,49 @@ export default {
       content: '',
       file: null,
       image: null,
-     columns: [
+      alert: false,
+      alert2: false,
+      msg: '',
+      columns: [
         {
           name: 'comment_no',
           required: true,
           label: '댓글번호',
           align: 'left',
-          field:'comment_no',
-          sortable: true
+          field: 'comment_no',
+          sortable: true,
         },
         {
           name: 'user_name',
           required: true,
           label: '작성한 ID',
           align: 'left',
-          field:'user_name',
-          sortable: true
+          field: 'user_name',
+          sortable: true,
         },
         {
           name: 'comment_content',
           required: true,
           label: '댓글내용',
           align: 'left',
-          field:'comment_content',
-          sortable: true
+          field: 'comment_content',
+          sortable: true,
         },
         {
           name: 'comment_time',
           required: true,
           label: '댓글시간',
           align: 'left',
-          field:'comment_time',
-          sortable: true
+          field: 'comment_time',
+          sortable: true,
         },
         {
-          name:'actions',
-          label:'Actions',
-          field:'',
-          align:'center'
-        }
-     ]
+          name: 'actions',
+          label: 'Actions',
+          field: '',
+          align: 'center',
+        },
+      ],
     };
   },
 
@@ -278,15 +314,15 @@ export default {
     // moveList() {
     //   this.$router.push('/board');
     // },
-    
+
     checkValue() {
       if (this.loginCookie) {
         let err = true;
-        let msg = '';
+        this.msg = '';
 
         if (!this.comment_content) {
           err = false;
-          msg = '내용을 입력해주세요.';
+          this.msg = '내용을 입력해주세요.';
           this.$refs.comment_content.focus();
         }
         // else if (!this.user_name) {
@@ -295,10 +331,11 @@ export default {
         //   this.$refs.user_name.focus();
         // }
 
-        if (!err) alert(msg);
+        if (!err) this.alert = true;
         else this.writeComment();
       } else {
-        alert('댓글을 작성하려면 로그인 해주세요.');
+        this.msg = '댓글을 작성하려면 로그인 해주세요.';
+        this.alert = true;
       }
     },
     writeComment() {
@@ -311,32 +348,34 @@ export default {
           bnum: this.bnum,
         })
         .then(({ data }) => {
-          let msg = '댓글 작성 중 문제가 발생했습니다.';
+          this.msg = '댓글 작성 중 문제가 발생했습니다.';
           if (data === 'success') {
-            msg = '등록이 완료되었습니다.';
+            this.msg = '등록이 완료되었습니다.';
           }
-          alert(msg);
-          this.$router.go(this.$router.currentRoute);
+
+          this.alert2 = true;
+          // alert(msg);
+          // this.$router.go(this.$router.currentRoute);
         })
         .catch(() => {
           this.$router.push('/board/list');
         });
     },
     deleteComment(cnum, writer) {
-      
       if (writer != this.$cookie.get('userid')) {
-        console.log( this.$cookie.get('userid'));
+        console.log(this.$cookie.get('userid'));
         console.log(writer);
         console.log(cnum);
-        alert('본인만 삭제를 할 수 있습니다.');
+        this.msg = '본인만 삭제를 할 수 있습니다.';
+        this.alert = true;
       } else {
         http.delete('/comment/' + cnum).then(({ data }) => {
-          let msg = '댓글 삭제 중 문제가 발생했습니다.';
+          this.msg = '댓글 삭제 중 문제가 발생했습니다.';
           if (data === 'success') {
-            msg = '삭제가 완료되었습니다.';
+            this.msg = '삭제가 완료되었습니다.';
           }
-          alert(msg);
-          this.$router.go(this.$router.currentRoute);
+          this.alert2 = true;
+          //this.$router.go(this.$router.currentRoute);
         });
       }
     },
@@ -349,6 +388,9 @@ export default {
         this.timer = void 0;
       }, 2000);
     },
+    moveList() {
+      this.$router.go(this.$router.currentRoute);
+    },
   },
   beforeDestroy() {
     if (this.timer !== void 0) {
@@ -360,6 +402,7 @@ export default {
 </script>
 
 <style>
-a{
-    text-decoration: none;
-}</style>
+a {
+  text-decoration: none;
+}
+</style>

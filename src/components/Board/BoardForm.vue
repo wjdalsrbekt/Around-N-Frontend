@@ -80,9 +80,63 @@
       ]"
     />
     <br />
-    <button v-if="type === 'create'" @click="checkValue">등록</button>
-    <button v-else @click="checkValue">수정</button>
-    <button @click="moveList">취소</button>
+    <q-btn
+      icon="mode_edit"
+      label="등록"
+      v-if="type === 'create'"
+      text-color="deep-green-3"
+      color="lime-5"
+      class="text-bold"
+      style="height: 55px"
+      @click="checkValue"
+    />
+    <q-btn
+      v-else
+      @click="checkValue"
+      icon="mode_edit"
+      text-color="deep-green-3"
+      color="lime-5"
+      class="text-bold"
+      style="height: 55px"
+      label="수정"
+    />
+    <q-btn
+      @click="moveList"
+      icon="clear"
+      text-color="deep-orange"
+      color="amber-4"
+      class="text-bold"
+      style="height: 55px"
+      label="취소"
+    />
+
+    <div class="q-pa-md">
+      <q-dialog v-model="alert">
+        <q-card class="bg-blue-grey-9">
+          <q-card-section class="text-lime-5">
+            <div class="text-h6 text-bold">알림</div>
+          </q-card-section>
+          <q-card-section class="q-pt-none text-subtitle2 text-white"> {{ msg }}</q-card-section>
+          <q-card-actions align="right">
+            <q-btn flat label="OK" color="teal-3" v-close-popup />
+          </q-card-actions>
+        </q-card>
+      </q-dialog>
+    </div>
+
+    <div class="q-pa-md">
+      <q-dialog v-model="alert2">
+        <q-card class="bg-blue-grey-9">
+          <q-card-section class="text-lime-5">
+            <div class="text-h6 text-bold">경고</div>
+          </q-card-section>
+          <q-card-section class="q-pt-none text-subtitle2 text-white"> {{ msg }}</q-card-section>
+          <q-card-actions align="right">
+            <q-btn flat label="OK" color="teal-3" @click="moveList" />
+          </q-card-actions>
+        </q-card>
+      </q-dialog>
+    </div>
   </div>
 </template>
 
@@ -108,29 +162,32 @@ export default {
       content: '',
       regdate: '',
       upfile: null,
+      alert: false,
+      msg: '',
+      alert2: false,
     };
   },
   methods: {
     ...mapActions(['getBoard', 'postBoard']),
     checkValue() {
       let err = true;
-      let msg = '';
+      this.msg = '';
 
       if (!this.title) {
         err = false;
-        msg = '제목 입력!!';
+        this.msg = '제목 입력!!';
         this.$refs.title.focus();
       } else if (!this.price) {
         err = false;
-        msg = '가격 입력!!';
+        this.msg = '가격 입력!!';
         this.$refs.price.focus();
       } else if (!this.content) {
         err = false;
-        msg = '내용 입력!!';
+        this.msg = '내용 입력!!';
         // this.$refs.content.focus();
       }
 
-      if (!err) alert(msg);
+      if (!err) this.alert = true;
       else this.type === 'create' ? this.createHandler() : this.updateHandler();
     },
     createHandler() {
@@ -184,13 +241,12 @@ export default {
           }
         )
         .then(({ data }) => {
-          let msg = '등록 처리 중 문제가 발생하였습니다.';
+          this.msg = '등록 처리 중 문제가 발생하였습니다.';
           if (data === 'success') {
-            msg = '등록이 완료되었습니다.';
+            this.msg = '등록이 완료되었습니다.';
           }
 
-          alert(msg);
-          this.moveList();
+          this.alert2 = true;
         })
         .catch(() => {
           this.moveList();
@@ -198,7 +254,8 @@ export default {
     },
     updateHandler() {
       if (this.$cookie.get('userid') != this.userid) {
-        alert('본인만 게시글을 수정할 수 있습니다.');
+        this.msg = '본인만 게시글을 수정할 수 있습니다.';
+        this.alert = true;
       } else {
         /*http
           .put('/board', {
@@ -251,13 +308,12 @@ export default {
             }
           )
           .then(({ data }) => {
-            let msg = '수정 처리 중 문제가 발생하였습니다.';
+            this.msg = '수정 처리 중 문제가 발생하였습니다.';
             if (data === 'success') {
-              msg = '수정이 완료되었습니다.';
+              this.msg = '수정이 완료되었습니다.';
             }
 
-            alert(msg);
-            this.moveList();
+            this.alert2 = true;
           })
           .catch(() => {
             this.moveList();
