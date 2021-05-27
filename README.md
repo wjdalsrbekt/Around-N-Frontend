@@ -229,17 +229,18 @@
 
 ## 프로젝트 일정
 ---
-![image](/uploads/f0ce58e598679a3f7db190eefe4a91a1/image.png)
+![image](https://user-images.githubusercontent.com/47201943/119829047-c9846100-bf35-11eb-9ccd-e8e60c71aaaf.png)
+
 
 
 ## 프로젝트 아키텍쳐
 ---
-![image](/uploads/69eba336b9bd88f66e21f0d9f73b598d/image.png)
+![image](https://user-images.githubusercontent.com/47201943/119829062-ce491500-bf35-11eb-9350-8aa5501dc483.png)
 
 ## 개발 패턴
 ---
 #### 폭포수 모델
-![image](/uploads/ef6b1afff311db2d0a24a5ec500b4a12/image.png)
+![image](https://user-images.githubusercontent.com/47201943/119829081-d43ef600-bf35-11eb-8168-3ea8b06a9bf4.png)
 
 ## ✅ToDoList
 ---
@@ -270,9 +271,6 @@
 새로운 Framework인 퀘이사를 공부, 적용시켜 
 원활히 프로젝트가 동작할땐 정말 짜릿하였습니다.
 
-### 라이센스
----
- > This is released under the MIT license. See LICENSE for details.
 
 ## 프로젝트 설치 후,
 ```
@@ -288,5 +286,8 @@ npm run serve
 ```
 npm run build
 ```
+### 라이센스
+---
+ > This is released under the MIT license. See LICENSE for details.
 
 
