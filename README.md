@@ -164,9 +164,9 @@
 개발 패턴
 ![image](/uploads/ef6b1afff311db2d0a24a5ec500b4a12/image.png)
 
-ToDoList
-5월 19일
-https://www.notion.so/ToDoList-365d57b9da7f4cd2a4f8ece3515297f0 
+## ✅ToDoList
+ - <a href="https://www.notion.so/ToDoList-365d57b9da7f4cd2a4f8ece3515297f0 ">5월 19일</a>
+
 5월 20일
 https://www.notion.so/ToDoList-770706e9e78d4d81a53a24139725d956
 5월 21일
@@ -184,7 +184,7 @@ https://www.notion.so/ToDoList-e3fb12d746314a1ba20991228e5737dc
 5월 27일
 https://www.notion.so/ToDoList-911390391c0a4039b0d32e2df48dea96
 
-## 프로젝트 후기
+## ✏프로젝트 후기
 
 ##### 노영주
  - 한학기 동안 배운 것들을 정리할 수 있는 시간이였습니다.
