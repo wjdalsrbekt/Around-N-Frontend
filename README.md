@@ -22,17 +22,22 @@
 ---
 
 ##### ️정민규 (팀장)
--BackEnd : SpringBoot REST Server 구상 및 구축
--DataBase : SCHEMA, TABLE, VIEW 구조 
--FrontEnd : 게시판, 회원 관련 스타일링
-            오픈웨더 API 구현 (날씨 정보)
+- BackEnd : 
+    - SpringBoot REST Server 구상 및 구축
+- DataBase 
+    - SCHEMA, TABLE, VIEW 구조 
+- FrontEnd : 
+    - 게시판, 회원 관련 스타일링
+    - 오픈웨더 API 구현 (날씨 정보)
             
 ##### ️노영주 (팀원)
--FrontEnd : Vue/Vuex/Quasar 구상 및 구축
-            (매물, 게시글, 댓글, 로그인, 로그아웃)
-            매물, 메인페이지, 이벤트 스타일링
-            KAKAO Map API 구현 (마커연결 및 디자인)
--BackEnd : 회원 관련 기능 추가
+- FrontEnd : 
+    - Vue/Vuex/Quasar 구상 및 구축
+    - (매물, 게시글, 댓글, 로그인, 로그아웃)
+    - 매물, 메인페이지, 이벤트 스타일링
+    - KAKAO Map API 구현 (마커연결 및 디자인)
+-BackEnd : 
+    - 회원 관련 기능 추가
 
 
 ##💙프로젝트에 관하여
